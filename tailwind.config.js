@@ -56,6 +56,24 @@ const config = {
 			},
 			fontFamily: {
 				sans: [...fontFamily.sans]
+			},
+			keyframes: {
+				slosh: {
+					'0%': { transform: 'rotate(-18deg)' },
+					'20%': { transform: 'rotate(10deg)' },
+					'40%': { transform: 'rotate(-6deg)' },
+					'60%': { transform: 'rotate(3deg)' },
+					'80%': { transform: 'rotate(-1.8deg)' },
+					'100%': { transform: 'rotate(0deg)' },
+				},
+				flow: {
+					'0%': { backgroundPosition: "0% 50%" },
+					'100%': { backgroundPosition: "200% 50%" },
+				}
+			},
+			animation: {
+				'slosh': 'slosh 1s cubic-bezier(.66,-0.14,.33,1.14) 1 alternate',
+				'flow': 'flow 3s linear infinite',
 			}
 		}
 	},
