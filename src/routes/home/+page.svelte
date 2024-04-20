@@ -32,7 +32,7 @@
         console.log(res.pools)
         
         return res.pools;
-	};
+	}
 
 </script>
 
