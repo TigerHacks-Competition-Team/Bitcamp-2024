@@ -7,10 +7,10 @@ const stringify = JSON.stringify;
 
 export async function POST(event: RequestEvent) {
 	const req = await event.request.json();
+	const auth_token = event.request.headers.get("auth_token");
 
-	if (!req || !req.auth_token)
+	if (!req || auth_token)
 		return new Response(stringify({ passed: false, error: "Malformed body" }), { status: 400 });
-	const { auth_token } = req;
 
 	// Todo: Validate authorization token
 

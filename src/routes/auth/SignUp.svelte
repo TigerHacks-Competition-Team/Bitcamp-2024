@@ -17,10 +17,12 @@
 			if (!auth.currentUser) return;
 			await fetch("/api/v1/create_user", {
 				method: "POST",
+				headers: {
+					"auth_token": auth.currentUser.uid,
+				},
 				body: JSON.stringify({
 					first_name: "John",
 					last_name: "Doe",
-					auth_token: auth.currentUser.uid,
 					address: {
 						street_number: "123",
 						street_name: "Main St",

@@ -15,10 +15,12 @@ function validate(req: any, expected_keys: any) {
 
 export async function POST(event: RequestEvent) {
 	const req = await event.request.json();
+    const auth_token = event.request.headers.get("auth_token");
+
+    if(!auth_token) return new Response(stringify({ passed: false, error: "No auth token provided" }), { status: 400 });
 
 	if (
 		!validate(req, {
-			auth_token: "string",
 			name: "string",
 			members: "array",
 
@@ -29,7 +31,7 @@ export async function POST(event: RequestEvent) {
 	)
 		return new Response(stringify({ passed: false, error: "Malformed body" }), { status: 400 });
 
-	const { auth_token, name, members, target, deadline, merchant } = req;
+	const { name, members, target, deadline, merchant } = req;
 
 	let quant = 0;
 	for (const member of members) {
