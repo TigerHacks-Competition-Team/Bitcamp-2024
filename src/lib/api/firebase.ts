@@ -4,7 +4,7 @@ import { getAnalytics } from "firebase/analytics";
 import { collection, getFirestore } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, type User } from "firebase/auth";
 
-import { writable } from "svelte/store";
+import { writable } from 'svelte/store';
 
 const firebaseConfig = {
 	apiKey: import.meta.env.VITE_FB_KEY,
@@ -22,6 +22,18 @@ export const app = !getApps().length ? initializeApp(firebaseConfig) : getApps()
 export const auth = getAuth(app);
 export const store = getFirestore(app);
 export const user = writable<User | null>(null);
+
+auth.onAuthStateChanged(u => {
+	user.set(u);
+	if (browser) {
+		if (!u && !(window.location.pathname == "/auth" || window.location.pathname == "/")) {
+			window.location.pathname = "/auth"
+		}
+		if (u && window.location.pathname == "/auth") {
+			window.location.pathname = "/home"
+		}
+	}
+});
 
 export const usersRef = collection(store, "users");
 export const poolsRef = collection(store, "pools");
