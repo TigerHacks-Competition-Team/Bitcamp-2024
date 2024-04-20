@@ -1,10 +1,10 @@
 import type { RequestEvent } from "../$types";
 
-const stringify = JSON.stringify;
-
 import { store } from "$lib/api/firebase";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 
+
+const stringify = JSON.stringify;
 let rand_uuid = (Math.random() + 1).toString(36).substring(2);
 function validate(req: any, expected_keys: any) {
 	for (const key in expected_keys) {
