@@ -4,6 +4,7 @@
 	import Label from "$lib/components/ui/label/label.svelte";
 	import { signUpEmailAndPassword, auth } from "$lib/api/firebase";
 	import { updateProfile } from "firebase/auth";
+	import { toast } from "svelte-sonner";
 
 	let email = "";
 	let password = "";
@@ -32,6 +33,8 @@
 					},
 				}),
 			});
+		}).catch(e => {
+			toast(`${e.name}: ${e.code}`);
 		});
 	};
 </script>
@@ -68,4 +71,5 @@
 			</div>
 		</div>
 	</form>
+	<a href="/">Back</a>
 </div>

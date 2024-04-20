@@ -4,6 +4,8 @@
 	import Navbar from '$lib/components/navbar/Navbar.svelte';
 	import { onMount } from 'svelte';
 	import '../app.css';
+	import { Toaster } from '$lib/components/ui/sonner';
 </script>
 
+<Toaster theme="light"/>
 <slot />

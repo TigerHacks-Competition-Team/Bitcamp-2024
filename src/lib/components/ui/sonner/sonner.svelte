@@ -6,7 +6,7 @@
 </script>
 
 <Sonner
-	theme={$mode}
+	theme={"light"}
 	class="toaster group"
 	toastOptions={{
 		classes: {

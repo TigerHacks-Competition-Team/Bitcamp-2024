@@ -3,12 +3,15 @@
 	import { signInEmailAndPassword } from '$lib/api/firebase';
 	import { Label } from '$lib/components/ui/label';
 	import { Button } from '$lib/components/ui/button';
+	import { toast } from 'svelte-sonner';
 
     let email = "";
     let password = "";
 
     const onSubmit = () => {
-        signInEmailAndPassword(email, password);
+        signInEmailAndPassword(email, password).catch(e => {
+			toast(`${e.name}: ${e.code}`);
+		});;
     }
 </script>
 
@@ -40,8 +43,9 @@
 						bind:value={password}
 					/>
 				</div>
-				<Button type="submit">Sign up</Button>
+				<Button type="submit">Sign in</Button>
 			</div>
 		</div>
 	</form>
+	<a href="/">Back</a>
 </div>
