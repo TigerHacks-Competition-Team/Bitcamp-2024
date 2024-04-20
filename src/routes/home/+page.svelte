@@ -45,15 +45,19 @@
 {#await getData()}
 	...
 {:then data}
-	{#each data as pool}
-		<Card class="flex justify-between h-28">
-			<CardHeader class="w-1/2">
-				<CardTitle>{JSON.stringify(pool.data().name)}</CardTitle>
-				<CardDescription>Amount Due: {pool.due}</CardDescription>
-			</CardHeader>
-			<CardContent class="p-0 h-4/5 max-w-full aspect-square mr-4 self-center">
-				<Water></Water>
-			</CardContent>
-		</Card>
-	{/each}
+    {#if data}
+        {#each data as pool}
+            <Card class="flex justify-between h-28">
+                <CardHeader class="w-1/2">
+                    <CardTitle>{pool?.data()?.name || "Unkown"}</CardTitle>
+                    <CardDescription>Amount Due: {pool?.data()?.due || "Unkown"}</CardDescription>
+                </CardHeader>
+                <CardContent class="p-0 h-4/5 max-w-full aspect-square mr-4 self-center">
+                    <Water></Water>
+                </CardContent>
+            </Card>
+        {/each}
+    {:else}
+        Error fetching data!
+    {/if}
 {/await}
