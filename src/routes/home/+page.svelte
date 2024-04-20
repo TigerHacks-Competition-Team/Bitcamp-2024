@@ -9,11 +9,22 @@
 	import { onMount } from "svelte";
     import { app, auth, poolsRef, store, user, usersRef } from "$lib/api/firebase"
     import { collection, getDoc, setDoc, addDoc, updateDoc, getDocs, QueryDocumentSnapshot, where, query, doc } from 'firebase/firestore';
-
-	let shake: (amount: number) => void;
+	import type { User } from "firebase/auth";
+	import { browser } from "$app/environment";
 
     const getData = async () => {
-        const userSnapshot = await getDoc(doc(usersRef, $user?.uid));
+        if (!browser) return;
+
+        const u: User = await new Promise(res => {
+            const unsub = user.subscribe(u => {
+                if (u) {
+                    res(u);
+                    unsub();
+                }
+            });
+        });
+
+        const userSnapshot = await getDoc(doc(usersRef, u.uid));
         const pools = userSnapshot?.data()?.pools
         const outPools = [];
 
@@ -25,7 +36,7 @@
 
             outPools.push(poolSnapshot);
         }
-        
+
         return outPools;
     }
 </script>
