@@ -55,8 +55,6 @@ export const getUser: () => Promise<User> = () => new Promise(res => {
 export const usersRef = collection(store, "users");
 export const poolsRef = collection(store, "pools");
 
-export { collection, getDoc, setDoc, addDoc, updateDoc, getDocs } from 'firebase/firestore';
-
 export const signUpEmailAndPassword = (email: string, password: string) => {
 	return createUserWithEmailAndPassword(auth, email, password);
 };

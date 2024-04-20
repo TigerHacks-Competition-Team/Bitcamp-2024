@@ -23,8 +23,6 @@
 
         if(!res.passed) return; //FIXME: Handle error
 
-        console.log(res)
-
         for (const pool of res.pools) {
             pool.prog = pool.members.reduce((acc: number, cur: any) => acc + cur.paid, 0);
         }

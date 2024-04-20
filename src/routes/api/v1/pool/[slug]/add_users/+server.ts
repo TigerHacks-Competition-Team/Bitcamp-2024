@@ -22,7 +22,15 @@ export async function GET(event: RequestEvent) {
         const user_doc = await getDoc(doc(store, `users/${user}`));
 
         if(!user_doc.exists) return new Response(JSON.stringify({passed: false, error: "User not found"}), { status: 404 });
+
+        const data = user_doc.data();
+        if(data == undefined) return new Response(JSON.stringify({passed: false, error: "User not found"}), { status: 404 });
+        if(data.pools.includes(pool.id)) continue;
         users_final.push(user);
+
+        updateDoc(doc(store, `users/${user}`), {
+            pools: [...data.pools, pool.id]
+        });
     }
 
 
