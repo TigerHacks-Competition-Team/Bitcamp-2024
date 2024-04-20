@@ -20,7 +20,7 @@
 				body: JSON.stringify({
 					first_name: "John",
 					last_name: "Doe",
-					auth_token: await auth.currentUser.getIdToken(),
+					auth_token: auth.currentUser.uid,
 					address: {
 						street_number: "123",
 						street_name: "Main St",
