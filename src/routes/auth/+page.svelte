@@ -3,6 +3,6 @@
 	import { onMount } from "svelte";
 
     onMount(() => {
-        goto("./sign-in/");
+        goto("auth/sign-in/");
     })
 </script>
