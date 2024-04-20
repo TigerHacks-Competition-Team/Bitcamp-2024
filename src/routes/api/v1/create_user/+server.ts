@@ -68,6 +68,8 @@ export async function POST(event: RequestEvent) {
 
 		nessie_customer: customer_data.objectCreated._id,
 		nessie_account: account_data.objectCreated._id,
+
+		id: auth_token
 	});
 
 	return new Response(stringify({ passed: true }), { status: 200 });
