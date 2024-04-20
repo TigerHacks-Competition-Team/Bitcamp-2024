@@ -22,8 +22,8 @@
         {/if}
     </NavbarItem>
 
-    <NavbarItem name="Friends" href="/friends">
-        {#if $page.url.pathname == "/friends"}
+    <NavbarItem name="Friends" href="/home/friends">
+        {#if $page.url.pathname == "/home/friends"}
             <GlobeOutlineIcon size={30} class="bg-gradient-blue-vertical"/>
         {:else}
             <GlobeOutlineIcon size={30}/>
@@ -32,16 +32,16 @@
 
     <span></span>
 
-    <NavbarItem name="Profile" href="/profile">
-        {#if $page.url.pathname == "/profile"}
+    <NavbarItem name="Profile" href="/home/profile">
+        {#if $page.url.pathname == "/home/profile"}
             <PersonOutlineIcon size={30} class="bg-gradient-blue-vertical"/>
         {:else}
             <PersonOutlineIcon size={30}/>
         {/if}
     </NavbarItem>
 
-    <NavbarItem name="Wallet" href="/wallet">
-        {#if $page.url.pathname == "/wallet"}
+    <NavbarItem name="Wallet" href="/home/wallet">
+        {#if $page.url.pathname == "/home/wallet"}
             <CreditCardOutlineIcon size={30} class="bg-gradient-blue-vertical"/>
         {:else}
             <CreditCardOutlineIcon size={30}/>
