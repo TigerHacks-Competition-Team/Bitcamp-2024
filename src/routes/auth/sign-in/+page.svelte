@@ -1,29 +1,47 @@
 <script lang="ts">
 	import Input from '$lib/components/ui/input/input.svelte';
-    import * as Form from '$lib/components/ui/form';
-	import { user, auth } from '$lib/api/firebase';
-	import { goto } from '$app/navigation';
-	import { superForm, type Infer, type SuperValidated } from 'sveltekit-superforms';
-	import { authSchema, type AuthSchema } from '../authSchema';
-	import { zodClient } from 'sveltekit-superforms/adapters';
-	import { onMount } from 'svelte';
-	import { onAuthStateChanged } from 'firebase/auth';
-	import type { PageData } from '../$types';
-	import SignInForm from './SignInForm.svelte';
+	import { signInEmailAndPassword } from '$lib/api/firebase';
+	import { Label } from '$lib/components/ui/label';
+	import { Button } from '$lib/components/ui/button';
 
-    export let data: PageData;
+    let email = "";
+    let password = "";
 
-    onMount(() => {
-        onAuthStateChanged(auth, (u) => {
-            $user = u;
-
-            if ($user != undefined) {
-                goto("/home/")
-            }
-        })
-    })
+    const onSubmit = () => {
+        signInEmailAndPassword(email, password);
+    }
 </script>
 
 <div>
-	<SignInForm data={data.form}/>
+	<form on:submit|preventDefault={onSubmit}>
+		<div>
+			<div>
+				<div>
+					<Label for="email">Email</Label>
+					<Input
+						id="email"
+						placeholder="johnny@appleseed.com"
+						type="email"
+						autocapitalize="none"
+						autocomplete="email"
+						autocorrect="off"
+						bind:value={email}
+					/>
+				</div>
+				<div>
+					<Label for="password">Password</Label>
+					<Input
+						id="password"
+						placeholder=""
+						type="password"
+						autocapitalize="none"
+						autocomplete="password"
+						autocorrect="off"
+						bind:value={password}
+					/>
+				</div>
+				<Button type="submit">Sign up</Button>
+			</div>
+		</div>
+	</form>
 </div>
