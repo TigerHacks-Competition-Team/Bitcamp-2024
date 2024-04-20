@@ -34,7 +34,6 @@
         return res.pools;
 	};
 
-	console.log($user);
 </script>
 
 {#await getData()}
