@@ -7,7 +7,8 @@
 	import CardTitle from "$lib/components/ui/card/card-title.svelte";
 	import Card from "$lib/components/ui/card/card.svelte";
 	import { onMount } from "svelte";
-    import { app, auth, poolsRef, store, user, usersRef } from "$lib/api/firebase"
+    import { goto } from "$app/navigation"
+    import { app, auth, poolsRef, store, user, usersRef, getUser } from "$lib/api/firebase"
     import { collection, getDoc, setDoc, addDoc, updateDoc, getDocs, QueryDocumentSnapshot, where, query, doc } from 'firebase/firestore';
 	import type { User } from "firebase/auth";
 	import { browser } from "$app/environment";
@@ -15,18 +16,18 @@
     const getData = async () => {
         if (!browser) return;
 
-        const u: User = await new Promise(res => {
-            const unsub = user.subscribe(u => {
-                if (u) {
-                    res(u);
-                    unsub();
-                }
-            });
-        });
+        const u: User = await getUser();
 
-        const userSnapshot = await getDoc(doc(usersRef, u.uid));
-        const pools = userSnapshot?.data()?.pools
-        const outPools = [];
+        const res = await (await fetch("/api/v1/get_pools", {
+            headers: {
+                "auth_token": await u.getIdToken()
+            }
+        })).json();
+
+        if(!res.passed) return; //FIXME: Handle error
+        const outPools = res.pools;
+
+        console.log(outPools);
 
 		for (const pool of pools) {
 			const poolSnapshot = await getDoc(doc(poolsRef, pool));
@@ -47,15 +48,17 @@
 {:then data}
     {#if data}
         {#each data as pool}
-            <Card class="flex justify-between h-28">
-                <CardHeader class="w-1/2">
-                    <CardTitle>{pool?.data()?.name || "Unkown"}</CardTitle>
-                    <CardDescription>Amount Due: {pool?.data()?.due || "Unkown"}</CardDescription>
-                </CardHeader>
-                <CardContent class="p-0 h-4/5 max-w-full aspect-square mr-4 self-center">
-                    <Water></Water>
-                </CardContent>
-            </Card>
+            <a href={`home/${pool.id}`}>
+                <Card class="flex justify-between h-28 touch-none select-none">
+                    <CardHeader class="w-1/2">
+                        <CardTitle>{pool?.data()?.name || "Unkown"}</CardTitle>
+                        <CardDescription>Amount Due: {pool?.data()?.due || "Unkown"}</CardDescription>
+                    </CardHeader>
+                    <CardContent class="p-0 h-4/5 max-w-full aspect-square mr-4 self-center">
+                        <Water></Water>
+                    </CardContent>
+                </Card>
+            </a>
         {/each}
     {:else}
         Error fetching data!

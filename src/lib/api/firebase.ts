@@ -42,6 +42,15 @@ auth.onAuthStateChanged(u => {
 	}
 });
 
+export const getUser: () => Promise<User> = () => new Promise(res => {
+	const unsub = user.subscribe(u => {
+		if (u) {
+			res(u);
+			unsub();
+		}
+	});
+});
+
 export const usersRef = collection(store, "users");
 export const poolsRef = collection(store, "pools");
 
