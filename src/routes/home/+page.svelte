@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Water from "$lib/components/Water.svelte";
+	import Water from "$lib/components/water/Water.svelte";
 	import CardContent from "$lib/components/ui/card/card-content.svelte";
 	import CardDescription from "$lib/components/ui/card/card-description.svelte";
 	import CardFooter from "$lib/components/ui/card/card-footer.svelte";
@@ -7,8 +7,6 @@
 	import CardTitle from "$lib/components/ui/card/card-title.svelte";
 	import Card from "$lib/components/ui/card/card.svelte";
 	import { onMount } from "svelte";
-
-	let shake: (amount: number) => void;
 
     let testPools = [{name: "Dinner", due: "100"}];
 
@@ -24,7 +22,7 @@
             <CardDescription>Ammount Due: {pool.due}</CardDescription>
         </CardHeader>
         <CardContent class="p-0 h-4/5 max-w-full aspect-square mr-4 self-center">
-            <Water bind:shake></Water>
+            <Water></Water>
         </CardContent>
     </Card>
 {/each}
