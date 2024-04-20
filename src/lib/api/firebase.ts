@@ -1,15 +1,10 @@
-import { getApps, initializeApp } from 'firebase/app';
-import { getAnalytics } from 'firebase/analytics';
+import { getApps, initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 
-import { collection, getFirestore, doc } from 'firebase/firestore';
-import {
-	getAuth,
-	createUserWithEmailAndPassword,
-	signInWithEmailAndPassword,
-    type User,
-} from 'firebase/auth';
+import { collection, getFirestore } from "firebase/firestore";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, type User } from "firebase/auth";
 
-import { writable } from 'svelte/store';
+import { writable } from "svelte/store";
 
 const firebaseConfig = {
 	apiKey: import.meta.env.VITE_FB_KEY,
@@ -18,7 +13,7 @@ const firebaseConfig = {
 	storageBucket: import.meta.env.VITE_FB_STORAGE_BUCKET,
 	messagingSenderId: import.meta.env.VITE_FB_SENDER_ID,
 	appId: import.meta.env.VITE_FB_APP_ID,
-	measurementId: import.meta.env.VITE_FB_MEASUREMENT_ID
+	measurementId: import.meta.env.VITE_FB_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
@@ -30,8 +25,6 @@ export const user = writable<User | null>(null);
 
 export const usersRef = collection(store, "users");
 export const poolsRef = collection(store, "pools");
-
-export { collection, getDoc, setDoc, addDoc, updateDoc, getDocs } from 'firebase/firestore';
 
 export const signUpEmailAndPassword = (email: string, password: string) => {
 	return createUserWithEmailAndPassword(auth, email, password);

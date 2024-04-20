@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount } from "svelte";
 	import "./Water.css";
 
 	export const waterHeight = 100;

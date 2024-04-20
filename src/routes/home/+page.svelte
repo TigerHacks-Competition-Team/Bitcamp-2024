@@ -1,15 +1,12 @@
 <script lang="ts">
-	import Water from '$lib/components/water/Water.svelte';
-	import CardContent from '$lib/components/ui/card/card-content.svelte';
-	import CardDescription from '$lib/components/ui/card/card-description.svelte';
-	import CardHeader from '$lib/components/ui/card/card-header.svelte';
-	import CardTitle from '$lib/components/ui/card/card-title.svelte';
-	import Card from '$lib/components/ui/card/card.svelte';
-	import { poolsRef, user, usersRef } from '$lib/api/firebase';
-	import {
-		getDoc,
-		doc
-	} from 'firebase/firestore';
+	import Water from "$lib/components/water/Water.svelte";
+	import CardContent from "$lib/components/ui/card/card-content.svelte";
+	import CardDescription from "$lib/components/ui/card/card-description.svelte";
+	import CardHeader from "$lib/components/ui/card/card-header.svelte";
+	import CardTitle from "$lib/components/ui/card/card-title.svelte";
+	import Card from "$lib/components/ui/card/card.svelte";
+	import { poolsRef, user, usersRef } from "$lib/api/firebase";
+	import { getDoc, doc } from "firebase/firestore";
 
 	const getData = async () => {
 		const userSnapshot = await getDoc(doc(usersRef, $user?.uid));
@@ -17,14 +14,14 @@
 		const outPools = [];
 
 		if (!pools) {
-			console.warn('Failed to get user pools!', userSnapshot);
+			console.warn("Failed to get user pools!", userSnapshot);
 			return;
 		}
 
 		for (const pool of pools) {
 			const poolSnapshot = await getDoc(doc(poolsRef, pool));
 			if (!poolSnapshot.exists) {
-				console.warn('Tried to get invalid pool!');
+				console.warn("Tried to get invalid pool!");
 				continue;
 			}
 

@@ -1,20 +1,20 @@
 <script lang="ts">
-	import Button from '$lib/components/ui/button/button.svelte';
-	import Input from '$lib/components/ui/input/input.svelte';
-	import Label from '$lib/components/ui/label/label.svelte';
-	import { signUpEmailAndPassword, auth } from '$lib/api/firebase';
-	import { updateProfile } from 'firebase/auth';
+	import Button from "$lib/components/ui/button/button.svelte";
+	import Input from "$lib/components/ui/input/input.svelte";
+	import Label from "$lib/components/ui/label/label.svelte";
+	import { signUpEmailAndPassword, auth } from "$lib/api/firebase";
+	import { updateProfile } from "firebase/auth";
 
-	let email = '';
-	let password = '';
+	let email = "";
+	let password = "";
 
 	const onSubmit = () => {
-		signUpEmailAndPassword(email, password).then(async (e) => {
+		signUpEmailAndPassword(email, password).then(async e => {
 			await updateProfile(e.user, {
-				displayName: `${email}`
+				displayName: `${email}`,
 			});
 
-			if(!auth.currentUser) return;
+			if (!auth.currentUser) return;
 			await fetch("/api/v1/create_user", {
 				method: "POST",
 				body: JSON.stringify({
@@ -26,10 +26,10 @@
 						street_name: "Main St",
 						city: "Springfield",
 						state: "IL",
-						zip: "62701"
-					}
+						zip: "62701",
+					},
 				}),
-			})
+			});
 		});
 	};
 </script>
