@@ -1,4 +1,4 @@
-export async function GET({ url: any }) {
+export async function GET() {
 
     const response = await fetch('https://example.com');
 

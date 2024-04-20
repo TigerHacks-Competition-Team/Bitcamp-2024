@@ -2,7 +2,7 @@
 	import Button from '$lib/components/ui/button/button.svelte';
 	import Input from '$lib/components/ui/input/input.svelte';
 	import Label from '$lib/components/ui/label/label.svelte';
-	import { signUpEmailAndPassword } from '$lib/api/firebase';
+	import { signUpEmailAndPassword, auth } from '$lib/api/firebase';
 	import { updateProfile } from 'firebase/auth';
 
 	let email = '';
@@ -13,6 +13,23 @@
 			await updateProfile(e.user, {
 				displayName: `${email}`
 			});
+
+			if(!auth.currentUser) return;
+			await fetch("/api/v1/create_user", {
+				method: "POST",
+				body: JSON.stringify({
+					first_name: "John",
+					last_name: "Doe",
+					auth_token: await auth.currentUser.getIdToken(),
+					address: {
+						street_number: "123",
+						street_name: "Main St",
+						city: "Springfield",
+						state: "IL",
+						zip: "62701"
+					}
+				}),
+			})
 		});
 	};
 </script>

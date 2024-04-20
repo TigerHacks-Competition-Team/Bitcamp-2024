@@ -28,7 +28,7 @@ export const auth = getAuth(app);
 export const store = getFirestore(app);
 export const user = writable<User | null>(null);
 
-export { collection, getDoc, setDoc, addDoc, updateDoc } from 'firebase/firestore';
+export { collection, getDoc, setDoc, doc, updateDoc } from 'firebase/firestore';
 
 export const signUpEmailAndPassword = (email: string, password: string) => {
 	return createUserWithEmailAndPassword(auth, email, password);
