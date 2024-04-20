@@ -19,27 +19,19 @@
         const u: User = await getUser();
 
         const res = await (await fetch("/api/v1/get_pools", {
-            headers: {
-                "auth_token": await u.getIdToken()
-            }
-        })).json();
+			headers: {
+				auth_token:
+					u.uid
+            },
+		})).json();
 
         if(!res.passed) return; //FIXME: Handle error
-        const outPools = res.pools;
 
-        console.log(outPools);
-
-		for (const pool of pools) {
-			const poolSnapshot = await getDoc(doc(poolsRef, pool));
-			if (!poolSnapshot.exists) {
-				console.warn("Tried to get invalid pool!");
-				continue;
-			}
-
-			outPools.push(poolSnapshot);
-		}
-
-		return outPools;
+        for (const pool of res.pools) {
+            pool.prog = pool.members.reduce((acc: number, cur: any) => acc + cur.paid, 0);
+        }
+        
+        return res.pools;
 	};
 </script>
 
@@ -51,8 +43,8 @@
             <a href={`home/${pool.id}`}>
                 <Card class="flex justify-between h-28 touch-none select-none">
                     <CardHeader class="w-1/2">
-                        <CardTitle>{pool?.data()?.name || "Unkown"}</CardTitle>
-                        <CardDescription>Amount Due: {pool?.data()?.due || "Unkown"}</CardDescription>
+                        <CardTitle>{pool.name || "Unkown"}</CardTitle>
+                        <CardDescription>Progress: ${pool.prog} / ${pool.target || "Unkown"}</CardDescription>
                     </CardHeader>
                     <CardContent class="p-0 h-4/5 max-w-full aspect-square mr-4 self-center">
                         <Water></Water>
