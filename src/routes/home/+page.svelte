@@ -28,31 +28,32 @@
         const pools = userSnapshot?.data()?.pools
         const outPools = [];
 
-        if (!pools) { console.warn("Failed to get user pools!", userSnapshot); return; }
+		for (const pool of pools) {
+			const poolSnapshot = await getDoc(doc(poolsRef, pool));
+			if (!poolSnapshot.exists) {
+				console.warn('Tried to get invalid pool!');
+				continue;
+			}
 
-        for (const pool of pools) {
-            const poolSnapshot = await getDoc(doc(poolsRef, pool));
-            if (!poolSnapshot.exists) { console.warn("Tried to get invalid pool!"); continue; }
+			outPools.push(poolSnapshot);
+		}
 
-            outPools.push(poolSnapshot);
-        }
-
-        return outPools;
-    }
+		return outPools;
+	};
 </script>
 
 {#await getData()}
-    ...
+	...
 {:then data}
-    {#each data as pool}
-        <Card class="flex justify-between h-28">
-            <CardHeader class="w-1/2">
-                <CardTitle>{JSON.stringify(pool.data().name)}</CardTitle>
-                <CardDescription>Ammount Due: {pool.due}</CardDescription>
-            </CardHeader>
-            <CardContent class="p-0 h-4/5 max-w-full aspect-square mr-4 self-center">
-                <Water></Water>
-            </CardContent>
-        </Card>
-    {/each}
+	{#each data as pool}
+		<Card class="flex justify-between h-28">
+			<CardHeader class="w-1/2">
+				<CardTitle>{JSON.stringify(pool.data().name)}</CardTitle>
+				<CardDescription>Amount Due: {pool.due}</CardDescription>
+			</CardHeader>
+			<CardContent class="p-0 h-4/5 max-w-full aspect-square mr-4 self-center">
+				<Water></Water>
+			</CardContent>
+		</Card>
+	{/each}
 {/await}
