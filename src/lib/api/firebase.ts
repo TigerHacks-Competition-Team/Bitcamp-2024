@@ -1,5 +1,7 @@
 import { getApps, initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
+
+import { getFirestore } from 'firebase/firestore';
 import {
 	getAuth,
 	createUserWithEmailAndPassword,
@@ -23,7 +25,10 @@ const firebaseConfig = {
 export const app = !getApps().length ? initializeApp(firebaseConfig) : getApps()[0];
 //export const analytics = getAnalytics(app);
 export const auth = getAuth(app);
+export const store = getFirestore(app);
 export const user = writable<User | null>(null);
+
+export { collection, getDoc, setDoc, addDoc, updateDoc } from 'firebase/firestore';
 
 export const signUpEmailAndPassword = (email: string, password: string) => {
 	return createUserWithEmailAndPassword(auth, email, password);
