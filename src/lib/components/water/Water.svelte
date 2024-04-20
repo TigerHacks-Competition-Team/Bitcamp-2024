@@ -2,7 +2,7 @@
 	import { onMount } from "svelte";
 	import "./Water.css";
 
-	export const waterHeight = 100;
+	export let waterHeight: number;
 </script>
 
 <div class="aspect-square border-2 rounded-full border-black w-full h-full flex flex-col overflow-hidden">
@@ -17,7 +17,7 @@
 		<defs>
 			<path
 				id="gentle-wave"
-				d={`M-160 ${50 + (75 - waterHeight)} c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v150h-352z`}
+				d={`M-160 ${(1-waterHeight) * 140 - 10} c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v150h-352z`}
 			/>
 		</defs>
 		<g class="parallax">

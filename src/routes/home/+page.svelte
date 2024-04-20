@@ -49,7 +49,7 @@
                         <CardDescription>Progress: ${pool.prog} / ${pool.target || "Unkown"}</CardDescription>
                     </CardHeader>
                     <CardContent class="p-0 h-4/5 max-w-full aspect-square mr-4 self-center">
-                        <Water></Water>
+                        <Water waterHeight={pool.prog / pool.target}></Water>
                     </CardContent>
                 </Card>
             </a>
