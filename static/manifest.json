@@ -1,0 +1,15 @@
+{
+    "name": "Pools",
+    "short_name": "Pools",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#fff",
+    "theme_color": "#1e1e1e",
+    "description": "Dividing costs among friends made easy",
+    "icons": [
+        {
+            "src": "favicon.png",
+            "sizes": "128x128"
+        }
+    ]
+}
