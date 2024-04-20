@@ -6,13 +6,14 @@
 	import { updateProfile } from "firebase/auth";
 	import { toast } from "svelte-sonner";
 
+    let name = ""
 	let email = "";
 	let password = "";
 
 	const onSubmit = () => {
 		signUpEmailAndPassword(email, password).then(async e => {
 			await updateProfile(e.user, {
-				displayName: `${email}`,
+				displayName: `${name}`,
 			});
 
 			if (!auth.currentUser) return;
@@ -43,6 +44,16 @@
 	<form on:submit|preventDefault={onSubmit}>
 		<div>
 			<div>
+                <div>
+                    <Label for="email">Name</Label>
+					<Input
+						id="email"
+						placeholder="John Appleseed"
+						autocapitalize="none"
+						autocorrect="off"
+						bind:value={name}
+					/>
+                </div>
 				<div>
 					<Label for="email">Email</Label>
 					<Input

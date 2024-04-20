@@ -2,14 +2,10 @@
 	import Water from "$lib/components/water/Water.svelte";
 	import CardContent from "$lib/components/ui/card/card-content.svelte";
 	import CardDescription from "$lib/components/ui/card/card-description.svelte";
-	import CardFooter from "$lib/components/ui/card/card-footer.svelte";
 	import CardHeader from "$lib/components/ui/card/card-header.svelte";
 	import CardTitle from "$lib/components/ui/card/card-title.svelte";
 	import Card from "$lib/components/ui/card/card.svelte";
-	import { onMount } from "svelte";
-    import { goto } from "$app/navigation"
-    import { app, auth, poolsRef, store, user, usersRef, getUser } from "$lib/api/firebase"
-    import { collection, getDoc, setDoc, addDoc, updateDoc, getDocs, QueryDocumentSnapshot, where, query, doc } from 'firebase/firestore';
+    import { user, getUser } from "$lib/api/firebase"
 	import type { User } from "firebase/auth";
 	import { browser } from "$app/environment";
 
@@ -27,9 +23,13 @@
 
         if(!res.passed) return; //FIXME: Handle error
 
+        console.log(res)
+
         for (const pool of res.pools) {
             pool.prog = pool.members.reduce((acc: number, cur: any) => acc + cur.paid, 0);
         }
+
+        console.log(res.pools)
         
         return res.pools;
 	};

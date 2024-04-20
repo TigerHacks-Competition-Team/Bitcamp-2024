@@ -49,6 +49,12 @@ const config = {
 					foreground: "hsl(var(--card-foreground) / <alpha-value>)"
 				}
 			},
+			backgroundImage: {
+				'gradient-blue-vertical': 'linear-gradient(180deg, #62DCF6 0%, #5FB4F2 100%)'
+			},
+			dropShadow: {
+				'blue-glow': `drop-shadow(0px 1.6px 4px rgba(98, 220, 246, 0.25)) drop-shadow(0px 0px 50px rgba(98, 220, 246, 0.50))`
+			},
 			borderRadius: {
 				lg: "var(--radius)",
 				md: "calc(var(--radius) - 2px)",

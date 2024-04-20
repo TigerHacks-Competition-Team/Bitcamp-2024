@@ -8,5 +8,8 @@
 </script>
 
 <Toaster />
-<slot />
+<div class="h-screen bg-background">
+	<slot/>
+</div>
+
 <Navbar></Navbar>
