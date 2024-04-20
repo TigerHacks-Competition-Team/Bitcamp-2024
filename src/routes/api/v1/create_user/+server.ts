@@ -9,7 +9,7 @@ export async function POST(event: RequestEvent) {
 	const req = await event.request.json();
 	const auth_token = event.request.headers.get("auth_token");
 
-	if (!req || auth_token)
+	if (!req || !auth_token)
 		return new Response(stringify({ passed: false, error: "Malformed body" }), { status: 400 });
 
 	// Todo: Validate authorization token
@@ -32,10 +32,11 @@ export async function POST(event: RequestEvent) {
 		}
 	);
 
-	if (customer_creation_response.status !== 201)
+	if (customer_creation_response.status !== 201) {
 		return new Response(stringify({ passed: false, error: "Failed to create customer" }), {
 			status: 500,
 		});
+	}
 
 	const customer_data = await customer_creation_response.json();
 
@@ -56,10 +57,12 @@ export async function POST(event: RequestEvent) {
 	);
 
 	const account_data = await account_creation_response.json();
-	if (account_creation_response.status !== 201)
+
+	if (account_creation_response.status !== 201) {
 		return new Response(stringify({ passed: false, error: "Failed to create account" }), {
 			status: 500,
 		});
+	}
 
 	await setDoc(doc(store, `users/${auth_token}`), {
 		...nessie_req,
