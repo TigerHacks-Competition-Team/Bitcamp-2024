@@ -33,6 +33,7 @@
 		"clsx": "^2.1.0",
 		"cmdk-sv": "^0.0.17",
 		"embla-carousel-svelte": "^8.0.2",
+		"firebase": "^10.11.0",
 		"formsnap": "^1.0.0",
 		"lucide-svelte": "^0.372.0",
 		"mode-watcher": "^0.3.0",
