@@ -7,24 +7,41 @@
 	import CardTitle from "$lib/components/ui/card/card-title.svelte";
 	import Card from "$lib/components/ui/card/card.svelte";
 	import { onMount } from "svelte";
+    import { app, auth, poolsRef, store, user, usersRef } from "$lib/api/firebase"
+    import { collection, getDoc, setDoc, addDoc, updateDoc, getDocs, QueryDocumentSnapshot, where, query, doc } from 'firebase/firestore';
 
 	let shake: (amount: number) => void;
 
-    let testPools = [{name: "Dinner", due: "100"}];
+    const getData = async () => {
+        const userSnapshot = await getDoc(doc(usersRef, $user?.uid));
+        const pools = userSnapshot?.data()?.pools
+        const outPools = [];
 
-    onMount(() => {
+        if (!pools) { console.warn("Failed to get user pools!", userSnapshot); return; }
+
+        for (const pool of pools) {
+            const poolSnapshot = await getDoc(doc(poolsRef, pool));
+            if (!poolSnapshot.exists) { console.warn("Tried to get invalid pool!"); continue; }
+
+            outPools.push(poolSnapshot);
+        }
         
-    })
+        return outPools;
+    }
 </script>
 
-{#each testPools as pool}
-    <Card class="flex justify-between h-28">
-        <CardHeader class="w-1/2">
-            <CardTitle>{pool.name}</CardTitle>
-            <CardDescription>Ammount Due: {pool.due}</CardDescription>
-        </CardHeader>
-        <CardContent class="p-0 h-4/5 max-w-full aspect-square mr-4 self-center">
-            <Water bind:shake></Water>
-        </CardContent>
-    </Card>
-{/each}
+{#await getData()}
+    ...
+{:then data}
+    {#each data as pool}
+        <Card class="flex justify-between h-28">
+            <CardHeader class="w-1/2">
+                <CardTitle>{JSON.stringify(pool.data().name)}</CardTitle>
+                <CardDescription>Ammount Due: {pool.due}</CardDescription>
+            </CardHeader>
+            <CardContent class="p-0 h-4/5 max-w-full aspect-square mr-4 self-center">
+                <Water bind:shake></Water>
+            </CardContent>
+        </Card>
+    {/each}
+{/await}

@@ -1,7 +1,7 @@
 import { getApps, initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 
-import { getFirestore } from 'firebase/firestore';
+import { collection, getFirestore, doc } from 'firebase/firestore';
 import {
 	getAuth,
 	createUserWithEmailAndPassword,
@@ -28,7 +28,10 @@ export const auth = getAuth(app);
 export const store = getFirestore(app);
 export const user = writable<User | null>(null);
 
-export { collection, getDoc, setDoc, addDoc, updateDoc } from 'firebase/firestore';
+export const usersRef = collection(store, "users");
+export const poolsRef = collection(store, "pools");
+
+export { collection, getDoc, setDoc, addDoc, updateDoc, getDocs } from 'firebase/firestore';
 
 export const signUpEmailAndPassword = (email: string, password: string) => {
 	return createUserWithEmailAndPassword(auth, email, password);
