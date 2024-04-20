@@ -8,8 +8,9 @@
     "description": "Dividing costs among friends made easy",
     "icons": [
         {
-            "src": "favicon.png",
-            "sizes": "128x128"
+            "src": "icon-1024.png",
+            "sizes": "1024x1024",
+            "type": "image/png"
         }
     ]
 }

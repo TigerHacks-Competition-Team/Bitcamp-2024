@@ -32,7 +32,7 @@
 		for (const pool of pools) {
 			const poolSnapshot = await getDoc(doc(poolsRef, pool));
 			if (!poolSnapshot.exists) {
-				console.warn('Tried to get invalid pool!');
+				console.warn("Tried to get invalid pool!");
 				continue;
 			}
 

@@ -1,20 +1,19 @@
 <script lang="ts">
-	import Button from '$lib/components/ui/button/button.svelte';
-	import Input from '$lib/components/ui/input/input.svelte';
-	import Label from '$lib/components/ui/label/label.svelte';
-	import { signInEmailAndPassword, user } from '$lib/api/firebase';
-	import { goto } from '$app/navigation';
+	import Button from "$lib/components/ui/button/button.svelte";
+	import Input from "$lib/components/ui/input/input.svelte";
+	import Label from "$lib/components/ui/label/label.svelte";
+	import { signInEmailAndPassword, user } from "$lib/api/firebase";
+	import { goto } from "$app/navigation";
 
-	let email = '';
-	let password = '';
+	let email = "";
+	let password = "";
 
 	const onSubmit = () => {
-		signInEmailAndPassword(email, password)
-            .then((e) => {
-                if ($user !== undefined) {
-                    goto("/home/");
-                }
-            });
+		signInEmailAndPassword(email, password).then(e => {
+			if ($user !== undefined) {
+				goto("/home/");
+			}
+		});
 	};
 </script>
 
