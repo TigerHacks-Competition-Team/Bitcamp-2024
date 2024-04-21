@@ -201,13 +201,14 @@
 	{#if pool && cards}
 		<div class="flex items-center content-between justify-evenly w-full">
 			<Dialog.Root>
-				<Dialog.Trigger>Add To Pool</Dialog.Trigger>
-				<Dialog.Content>
-					<Dialog.Header>
-						<Dialog.Title>Add To Pool</Dialog.Title>
-					</Dialog.Header>
-					<div class="flex flex-col justify-items-center">
-						<Input on:input={e => addPoolAmount = parseFloat(e.target.value)} placeholder="Ammount"></Input>
+				<Dialog.Trigger>{pool.prog == pool.target ? "Finalize Pool" : "Add To Pool"}</Dialog.Trigger>
+				<Dialog.Content class="w-[90%]">
+					{#if pool.prog != pool.target}
+						<Dialog.Header>
+							<Dialog.Title>Add To Pool</Dialog.Title>
+						</Dialog.Header>
+						<div class="flex flex-col justify-items-center">
+							<Input on:input={e => (addPoolAmount = parseFloat(e.target.value))} placeholder="Ammount"></Input>
 
 							<Select.Root
 								onSelectedChange={v => {
