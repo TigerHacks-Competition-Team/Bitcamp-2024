@@ -14,11 +14,15 @@ const config = {
 			}
 		},
 		extend: {
+			textColor: {
+				foreground: "#B7BABE",
+			},
 			colors: {
 				border: "hsl(var(--border) / <alpha-value>)",
 				input: "hsl(var(--input) / <alpha-value>)",
 				ring: "hsl(var(--ring) / <alpha-value>)",
 				background: "hsl(var(--background) / <alpha-value>)",
+				inputbackground: "hsl(var(--input-background) / <alpha-value>)",
 				foreground: "hsl(var(--foreground) / <alpha-value>)",
 				primary: {
 					DEFAULT: "hsl(var(--primary) / <alpha-value>)",
@@ -61,7 +65,7 @@ const config = {
 				sm: "calc(var(--radius) - 4px)"
 			},
 			fontFamily: {
-				sans: [...fontFamily.sans]
+				sans: ["Poppins", ...fontFamily.sans]
 			},
 			keyframes: {
 				slosh: {

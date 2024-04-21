@@ -5,6 +5,7 @@
 	import { onMount } from 'svelte';
 	import '../app.css';
 	import { Toaster } from '$lib/components/ui/sonner';
+	import "@fontsource/poppins";
 </script>
 
 <Toaster theme="light"/>
