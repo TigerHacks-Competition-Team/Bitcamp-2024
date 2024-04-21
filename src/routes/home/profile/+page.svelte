@@ -2,33 +2,34 @@
 	import { browser } from "$app/environment";
 	import { auth, getUser } from "$lib/api/firebase";
 	import type { User } from "firebase/auth";
-    import { signOut } from "firebase/auth";
-    import { user } from "$lib/api/firebase";
+	import { signOut } from "firebase/auth";
+	import { user } from "$lib/api/firebase";
 	import { Button } from "$lib/components/ui/button";
 	import { goto } from "$app/navigation";
 	import Avatar from "$lib/components/Avatar.svelte";
-    
-    const getData = async () => {
-        if (!browser) return;
 
-        const u: User = await getUser();
+	const getData = async () => {
+		if (!browser) return;
 
-        const res = await (await fetch("/api/v1/user/"+u.uid    , {
-			headers: {
-				auth_token:
-					u.uid
-            },
-		})).json();
+		const u: User = await getUser();
 
-        if(!res.passed) return; //FIXME: Handle error
+		const res = await (
+			await fetch("/api/v1/user/" + u.uid, {
+				headers: {
+					auth_token: u.uid,
+				},
+			})
+		).json();
 
-        return res.user;
-	}
+		if (!res.passed) return; //FIXME: Handle error
 
-    const logOut = () => {
-        signOut(auth);
-        goto("/");
-    }
+		return res.user;
+	};
+
+	const logOut = () => {
+		signOut(auth);
+		goto("/");
+	};
 </script>
 
 {#await getData()}
