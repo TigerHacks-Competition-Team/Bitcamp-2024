@@ -2,7 +2,6 @@ import type { RequestEvent } from "../$types";
 
 import { auth, store } from "$lib/api/firebase";
 import { setDoc, doc, getDoc, updateDoc} from "firebase/firestore";
-import { VITE_FB_NESSIE_API } from "$env/static/private";
 
 
 const stringify = JSON.stringify;
@@ -13,6 +12,7 @@ function validate(req: any, expected_keys: any) {
 	}
 	return true;
 }
+const nessie_key = import.meta.env.VITE_FB_NESSIE_API;
 
 export async function POST(event: RequestEvent) {
 	const req = await event.request.json();
@@ -25,7 +25,7 @@ export async function POST(event: RequestEvent) {
 	if (
 		!validate(req, {
 			name: "string",
-			members: "array",
+			members: "object",
 
 			target: "number",
 			deadline: "number",
@@ -59,13 +59,8 @@ export async function POST(event: RequestEvent) {
 	if (quant != target)
 		return new Response(stringify({ passed: false, error: "Dues don't match total" }), { status: 400 });
 
-	const merchant_doc = await getDoc(doc(store, `merchants/${merchant}`));
-
-	if (!merchant_doc.exists)
-		return new Response(stringify({ passed: false, error: "Merchant not found" }), { status: 404 });
-
 	const customer_id = (await (await fetch(
-		`http://api.nessieisreal.com/customers?key=${VITE_FB_NESSIE_API}`,
+		`http://api.nessieisreal.com/customers?key=${nessie_key}`,
 		{
 			method: "POST",
 			headers: {
@@ -83,10 +78,10 @@ export async function POST(event: RequestEvent) {
 				},
 			}),
 		}
-	)).json()).createdObject._id;
+	)).json()).objectCreated._id;
 
 	const account_id = (await(await fetch(
-		`http://api.nessieisreal.com/customers/${customer_id}/accounts?key=${VITE_FB_NESSIE_API}}`,
+		`http://api.nessieisreal.com/customers/${customer_id}/accounts?key=${nessie_key}}`,
 		{
 			method: "POST",
 			headers: {
