@@ -13,7 +13,7 @@ export async function POST(event: RequestEvent) {
     // @ts-ignore
     let pool = event.locals.pool;
 
-    if(!pool.members.includes(auth_token))
+    if(!pool.members.map(e => e.user_id).includes(auth_token))
         return new Response(JSON.stringify({passed: false, error: "Not a member of this pool"}), { status: 403 });
     
     let member_instance = pool.members.find((member: any) => member.user_id == auth_token);
@@ -54,4 +54,6 @@ export async function POST(event: RequestEvent) {
         members: pool.members,
         paid: pool.paid
     });
+
+    return new Response(JSON.stringify({passed: true}), { status: 200 });
 }

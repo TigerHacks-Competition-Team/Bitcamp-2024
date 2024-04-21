@@ -16,6 +16,9 @@
 	import Button from '$lib/components/ui/button/button.svelte';
 	import * as Dialog from '$lib/components/ui/dialog';
 	import { Input } from '$lib/components/ui/input';
+	import type { FocusTarget } from 'bits-ui';
+	import { goto } from '$app/navigation';
+	import { toast } from 'svelte-sonner';
 
 	const getData = async () => {
 		if (!browser) return;
@@ -44,8 +47,24 @@
 	let pieContainer: HTMLDivElement;
 	let transactionPending = false;
 
-	const addToPool = () => {
+	const addToPool = async () => {
+		if (!$user) return;
 		transactionPending = true;
+
+		const res = await (await fetch(`/api/v1/pool/${$page.params.slug}/contribute`, {
+			method: "POST",
+			headers: {
+				auth_token: $user.uid,
+			},
+			body: JSON.stringify({
+				account_id: addPoolCardId,
+				amount: addPoolAmount
+			}),
+		})).json();
+
+		console.log(res);
+
+		goto('/').then(() => goto(`/home/${$page.params.slug}`));
 	}
 
 	onMount(async () => {
