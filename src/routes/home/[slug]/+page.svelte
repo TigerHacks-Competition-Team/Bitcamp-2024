@@ -176,10 +176,10 @@
 	}
 </script>
 
-<div class="h-full flex flex-col gap-2 items-center">
+<div class="h-full flex flex-col gap-2 items-center overflow-y-scroll no-scrollbar" style="scrollbar-width:none">
 	{#if pool}
-		<h1 class="text-3xl text-[color:#B7BABE] font-semibold tracking-tight mt-4">{pool.name}</h1>
-		<h2 class="text-xl text-[color:#77787E] font-semibold">Deadline in 0 days</h2>
+		<h1 class="text-3xl text-[color:#B7BABE] mt-4">{pool.name}</h1>
+		<h2 class="text-xl text-[color:#77787E]">Deadline in 30 days</h2>
 	{/if}
 
 	<div class="w-[calc(100%-2rem)] relative aspect-square">
@@ -199,9 +199,13 @@
 	</div>
 
 	{#if pool && cards}
-		<div class="flex items-center content-between justify-evenly w-full">
+		<div class="flex flex-row items-center content-between justify-evenly w-full">
 			<Dialog.Root>
-				<Dialog.Trigger>{pool.prog == pool.target ? "Finalize Pool" : "Add To Pool"}</Dialog.Trigger>
+				<Dialog.Trigger>
+					<Button variant="fancy">
+					{pool.prog == pool.target ? "Finalize Pool" : "Add To Pool"}
+					</Button>
+				</Dialog.Trigger>
 				<Dialog.Content class="w-[90%]">
 					{#if pool.prog != pool.target}
 						<Dialog.Header>
@@ -239,24 +243,25 @@
 					{/if}
 				</Dialog.Content>
 			</Dialog.Root>
-			<div class="w-24 flex flex-col gap-2 items-center">
+			<div class="w-24 flex flex-row gap-2 items-center">
 				<h2 class="text-3xl text-[color:#B7BABE]">${pool.prog}</h2>
-				<Separator />
-				<h2 class="text-3xl text-[color:#77787E]">${pool.target}</h2>
+				<h2 class="text-3xl text-[color:#77787E]">/ ${pool.target}</h2>
 			</div>
 		</div>
-		<ScrollArea class="h-[160px] w-full px-2 mt-2">
-			{#each pool.members as member}
-				<Card class="flex align-middle items-center h-20 touch-none select-none bg-foreground/5 mt-4">
-					<div class="mx-2 h-[80%] aspect-square">
-						<Water waterHeight={member.paid / member.due}></Water>
-					</div>
-					<div>
-						<h1 class="text-2xl">{member.user_id.first_name} {member.user_id.last_name}</h1>
-						<p>${member.paid.toFixed(2)} / ${member.due.toFixed(2)}</p>
-					</div>
-				</Card>
-			{/each}
-		</ScrollArea>
+		<div class="flex flex-col w-full">
+			<!-- <ScrollArea class="h-[160px] w-full px-2 mt-2"> -->
+				{#each pool.members as member}
+					<Card class="flex align-middle items-center h-20 touch-none select-none bg-foreground/5 mt-4">
+						<div class="mx-2 h-[80%] aspect-square">
+							<Water waterHeight={member.paid / member.due}></Water>
+						</div>
+						<div>
+							<h1 class="text-2xl">{member.user_id.first_name} {member.user_id.last_name}</h1>
+							<p>${member.paid.toFixed(2)} / ${member.due.toFixed(2)}</p>
+						</div>
+					</Card>
+				{/each}
+			<!-- </ScrollArea> -->
+		</div>
 	{/if}
 </div>
