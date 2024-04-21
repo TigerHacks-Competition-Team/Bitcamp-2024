@@ -25,7 +25,11 @@
 
 <div>
 	<div
-		class="fixed inset-0"
+		class="absolute inset-0 -z-30"
+		style="background-size: 70px 70px;background-image:linear-gradient(to right, #1E2027 1px, transparent 1px),linear-gradient(to bottom, #1E2027 1px, transparent 1px);"
+	></div>
+	<div
+		class="fixed inset-0 -z-40"
 		style="background: radial-gradient(57.01% 13.63% at 50% 0%, #111E2D 0%, #17181D 100%), #17181D"
 	></div>
 	<form on:submit|preventDefault={onSubmit}>
@@ -74,5 +78,4 @@
 			</div>
 		</div> -->
 	</form>
-	<a href="/">Back</a>
 </div>
