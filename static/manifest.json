@@ -1,16 +1,18 @@
 {
-    "name": "Pools",
-    "short_name": "Pools",
-    "start_url": "/",
+    "name": "Puddle",
+    "short_name": "Puddle",
+    "start_url": "/auth/sign-up",
     "display": "standalone",
-    "background_color": "#fff",
-    "theme_color": "#1e1e1e",
+    "background_color": "#1D1D21",
+    "theme_color": "#66A3EB",
     "description": "Dividing costs among friends made easy",
     "icons": [
         {
-            "src": "icon-1024.png",
+            "src": "logo-1024.png",
             "sizes": "1024x1024",
             "type": "image/png"
-        }
+        },
+        { "src": "/logo-192x192.png", "type": "image/png", "sizes": "192x192" },
+        { "src": "/log-512x512.png", "type": "image/png", "sizes": "512x512" }
     ]
 }
