@@ -28,8 +28,6 @@
         signOut(auth);
         goto("/");
     }
-
-    getData();
 </script>
 
 {#await getData()}
