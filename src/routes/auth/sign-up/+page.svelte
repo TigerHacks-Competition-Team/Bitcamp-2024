@@ -88,7 +88,7 @@
 	}
 </script>
 
-<div class="overflow-x-hidden">
+<div class="overflow-x-hidden fixed inset-0">
 	<div
 		class="fixed inset-0"
 		style="background: radial-gradient(57.01% 13.63% at 50% 0%, #111E2D 0%, #17181D 100%), #17181D"
