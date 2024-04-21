@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let size = 24;
-	export let color = 'white';
+	export let color = '#575762';
 
     let className = "";
     export { className as class }
