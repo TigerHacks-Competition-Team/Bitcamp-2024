@@ -72,7 +72,10 @@ export async function POST(event: RequestEvent) {
 		pools: [],
 
 		nessie_customer: customer_data.objectCreated._id,
-		cards: [account_data.objectCreated._id],
+		cards: [{
+			id: account_data.objectCreated._id,
+			expiration: "08/25"
+		}],
 
 		id: auth_token,
 		email: req.email
