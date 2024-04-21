@@ -5,7 +5,6 @@
 	import Separator from "$lib/components/ui/separator/separator.svelte";
 	import { signUpEmailAndPassword, auth, getUser } from "$lib/api/firebase";
 	import LoginIcon from "$lib/components/icons/LoginIcon.svelte";
-	import FancyButton from "$lib/components/FancyButton.svelte";
 	import { onMount } from "svelte";
 	import { updateProfile } from "firebase/auth";
 	import { toast } from "svelte-sonner";
