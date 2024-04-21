@@ -36,7 +36,7 @@ export async function POST(event: RequestEvent) {
         payee_id: pool_account,
         amount: true_payment,
         transaction_date: Date.now(),
-        description: `Contribbution to ${pool.name}`
+        description: `Contribution to ${pool.name}`
     }
 
     const transfer = await(await fetch(`http://api.nessieisreal.com/accounts/${req.account_id}/transfers?key=${nessie_key}`, {
