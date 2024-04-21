@@ -16,6 +16,39 @@
 	let password = "";
 
 	const onSubmit = () => {
+
+		const address_line = document.getElementById("address-text") as HTMLInputElement;
+		let address = {
+			street_number: address_line.value.split(" ")[0],
+			street_name: address_line.value.split(" ").slice(1).join(" "),
+			city: (document.getElementById("city-text") as HTMLInputElement).value,
+			state: (document.getElementById("state-text") as HTMLInputElement).value,
+			zip: (document.getElementById("zip-code-text") as HTMLInputElement).value,
+		}
+
+		if(address.street_number == "" || address.street_name == "" || address.city == "" || address.state == "" || address.zip == "") {
+			toast("Please fill out all fields.");
+			return;
+		}
+
+		if(address.zip.length != 5) {
+			toast("Please enter a valid zip code.");
+			return;
+		}
+
+		if(address.state.length != 2) {
+			toast("Please enter state initials (ex: MI).");
+			return;
+		}
+
+		const first_name = (document.getElementById("first-name-text") as HTMLInputElement).value;
+		const last_name = (document.getElementById("last-name-text") as HTMLInputElement).value;
+
+		if(first_name == "" || last_name == "") {
+			toast("Please enter your first and last name.");
+			return;
+		}
+
 		signUpEmailAndPassword(email, password)
 			.then(async e => {
 				await updateProfile(e.user, {
@@ -30,26 +63,9 @@
 					"auth_token": usr.uid,
 				},
 				body: JSON.stringify({
-					first_name: "John",
-					last_name: "Doe",
-					address: {
-						street_number: "123",
-						street_name: "Main St",
-						city: "Springfield",
-						state: "IL",
-						zip: "62701",
-					},
-					body: JSON.stringify({
-						first_name: "John",
-						last_name: "Doe",
-						address: {
-							street_number: "123",
-							street_name: "Main St",
-							city: "Springfield",
-							state: "IL",
-							zip: "62701",
-						},
-					}),
+					first_name: first_name,
+					last_name: last_name,
+					address: address
 				})
 			})
 			.catch(e => {
@@ -73,6 +89,22 @@
 	onMount(updateSpacing);
 
 	function nextContent() {
+
+		// @ts-ignore
+		const em = document.getElementById("content-1").querySelector("input") as HTMLInputElement;
+
+		if(em.value == "") {
+			toast("Please enter an email address.");
+			return;
+		}
+
+		if(!em.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+			toast("Please enter a valid email address.");
+			return;
+		}
+
+		email = em.value;
+
 		console.log(1);
 		document.getElementById("content-" + currentContent + "-container")?.style.setProperty("--left", "-100vw");
 		document.getElementById("content-" + (currentContent + 1) + "-container")?.style.setProperty("--left", "-100vw");
@@ -83,6 +115,32 @@
 	function finalContent() {
 		const first = document.getElementById("first-content") as HTMLDivElement;
 		const second = document.getElementById("final-content") as HTMLDivElement;
+
+		// @ts-ignore
+		const pws = document.getElementById("content-2").querySelectorAll("input") as NodeListOf<HTMLInputElement>
+
+		if(pws[0].value == "") {
+			toast("Please enter a password.");
+			return;
+		}
+
+		if(pws[1].value == "") {
+			toast("Please confirm your password.");
+			return;
+		}
+
+		if(pws[0].value != pws[1].value) {
+			toast("Passwords do not match.");
+			return;
+		}
+
+		if(pws[0].value.length < 6) {
+			toast("Password must be at least 6 characters long.");
+			return;
+		}
+
+		password = pws[0].value;
+
 		first.style.left = "-100vw";
 		second.style.left = "50vw";
 	}
@@ -121,8 +179,8 @@
 		>
 			<h1 class="text-3xl text-center opacity-0">Create Your Account</h1>
 			<div id="content-2" class="flex flex-col gap-2">
-				<Input placeholder="Password" />
-				<Input placeholder="Confirm Password" />
+				<Input placeholder="Password" type="password"/>
+				<Input placeholder="Confirm Password" type="password"/>
 				<FancyButton text="Next" icon="arrow" on:click={finalContent}/>
 			</div>
 			<Separator class="opacity-0 mt-3" />
@@ -136,19 +194,19 @@
 	<div class="absolute top-1/2 left-[150vw] -translate-x-1/2 -translate-y-1/2 flex flex-col gap-3 w-[80vw] transition-all" id="final-content">
 		<h2 class="text-2xl text-center">We need some info from you before you begin...</h2>
 		<div class="flex flex-row gap-3">
-			<Input placeholder="First Name" />
-			<Input placeholder="Last Name" />
+			<Input id="first-name-text" placeholder="First Name" />
+			<Input id="last-name-text" placeholder="Last Name" />
 		</div>
-		<Input placeholder="Address" />
+		<Input id="address-text" placeholder="Address" />
 		<div class="flex flex-row gap-3">
-			<Input placeholder="Country" />
-			<Input placeholder="State" />
+			<Input id="country-text" placeholder="Country" />
+			<Input id="state-text" placeholder="State" />
 		</div>
 		<div class="flex flex-row gap-3">
-			<Input placeholder="City" />
-			<Input placeholder="Zip Code" />
+			<Input id="city-text" placeholder="City" />
+			<Input id="zip-code-text" placeholder="Zip Code" />
 		</div>
-		<FancyButton text="Get Started" icon="none" class="mt-2"/>
+		<FancyButton text="Get Started" icon="none" class="mt-2"on:click={onSubmit}/>
 	</div>
 
 	<!-- <form on:submit|preventDefault={onSubmit}>
