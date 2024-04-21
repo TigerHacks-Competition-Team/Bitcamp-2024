@@ -189,7 +189,7 @@
 					<Water waterHeight={pool.prog / pool.target} />
 				</div>
 
-				<h1 class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl">
+				<h1 class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl text-white">
 					{((pool.prog / pool.target) * 100).toFixed(0)}%
 				</h1>
 			{/if}
@@ -250,8 +250,7 @@
 			</div>
 		</div>
 		<ScrollArea class="h-[160px] w-full px-2 mt-2">
-		<div class="flex flex-col w-full">
-			<!-- <ScrollArea class="h-[160px] w-full px-2 mt-2"> -->
+			<div class="flex flex-col w-full">
 				{#each pool.members as member}
 					<Card class="flex align-middle items-center h-20 touch-none select-none bg-foreground/5 mt-4">
 						<div class="mx-2 h-[80%] aspect-square">
@@ -263,7 +262,7 @@
 						</div>
 					</Card>
 				{/each}
-			<!-- </ScrollArea> -->
-		</div>
+			</div>
+		</ScrollArea>		
 	{/if}
 </div>
