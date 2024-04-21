@@ -103,7 +103,7 @@
 	style="background: radial-gradient(57.01% 13.63% at 50% 0%, #111E2D 0%, #17181D 100%), #17181D"
 ></div>
 <div
-	class="absolute left-6 right-6 h-max pb-[150px] bg-[#1d1d21] border-[#252529] border-2 rounded-md overflow-y-scroll"
+	class="w-full h-full pb-[150px] bg-[#1d1d21] border-[#252529] border-2 rounded-md overflow-y-scroll"
 >
 	<p class="text-primary-foreground mt-6 mb-3 text-center text-lg">Create a Pool</p>
 
