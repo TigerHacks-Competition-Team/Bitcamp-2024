@@ -179,7 +179,7 @@
 						<Dialog.Title>Add To Pool</Dialog.Title>
 					</Dialog.Header>
 					<div class="flex flex-col justify-items-center">
-						<Input on:input={e => addPoolAmount = parseFloat(e.target.value)} placeholder="Ammount"></Input>
+						<Input on:input={e => addPoolAmount = parseFloat(e.target.value)} placeholder="Amount"></Input>
 
 						<Select.Root onSelectedChange={v => {addPoolCardId = v.value; console.log(addPoolAmount, addPoolCardId)}}>
 							<Select.Trigger class="w-[180px]">
