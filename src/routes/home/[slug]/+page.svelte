@@ -1,13 +1,16 @@
 <script lang="ts">
 	import { browser } from "$app/environment";
 	import { page } from "$app/stores";
-	import { getUser } from "$lib/api/firebase";
+	import { getUser, user } from "$lib/api/firebase";
 	import Water from "$lib/components/water/Water.svelte";
 	import type { User } from "firebase/auth";
 
 	import { pie, scaleOrdinal, schemeDark2, select, arc } from "d3";
 	import { Separator } from "$lib/components/ui/separator"
 	import { onMount } from "svelte";
+	import ArrowIcon from "$lib/components/icons/ArrowIcon.svelte";
+	import ScrollArea from "$lib/components/ui/scroll-area/scroll-area.svelte";
+	import { Card } from "$lib/components/ui/card";
 
 	const getData = async () => {
 		if (!browser) return;
@@ -34,6 +37,7 @@
 
 	onMount(async () => {
 		pool = await getData();
+		if (!$user) return;
 
 		let containerWidth = pieContainer.clientWidth;
 		let containerHeight = pieContainer.clientHeight;
@@ -45,9 +49,14 @@
 			.append("g")
 			.attr("transform", `translate(${containerWidth / 2},${containerHeight / 2})`);
 
-		const data = { a: 9, b: 20, c: 30, d: 8, e: 12, f: 3, g: 7, h: 14 };
+		const data: { [key: string]: number } = { };
+		
+		for (const member of pool.members) {
+			data[member.user + "_PAID"] = member.paid;
+			data[member.user + "_UNPAID"] = member.due - member.paid;
+		}
 
-		const colors = scaleOrdinal().domain(["a", "b", "c", "d", "e", "f", "g", "h"]).range(schemeDark2);
+		const colors = scaleOrdinal().domain(Object.keys(data)).range(new Array(16).fill(0).map((_, i) => i%2==0 ? schemeDark2[i/2] : "#333333"));
 		const pieChart = pie()
 			.sort(null)
 			.value(d => d[1])
@@ -60,7 +69,7 @@
 		const innerArc = arc()
 			.innerRadius(radius * 0.75) // This is the size of the donut hole
 			.outerRadius(radius * 0.85)
-			.cornerRadius(8);
+			.cornerRadius(4);
 
 		//Container for the gradients
 		var defs = svg.append("defs");
@@ -80,6 +89,20 @@
 			.attr("fill", d => colors(d.data[1]))
 			.style("opacity", 1)
 			.style("filter", "url(#glow)");
+		
+		for (const i in pool.members) {
+            const memberid = pool.members[i].user;
+
+            const mres = await (
+                await fetch('/api/v1/user/' + memberid, {
+                    headers: {
+                        auth_token: $user.uid
+                    }
+                })
+            ).json();
+
+            pool.members[i].user = mres.user
+        }
 	});
 </script>
 
@@ -89,15 +112,15 @@
 		<h2 class="text-xl text-[color:#77787E] font-semibold">Deadline in 0 days</h2>
 	{/if}
 
-	<div class="w-[calc(100%-0rem)] relative aspect-square mt-4">
-		<div class="w-[calc(100%-5.75rem)] absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2">
+	<div class="w-[calc(100%-2rem)] relative aspect-square">
+		<div class="w-[calc(100%-6.25rem)] absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2">
 			{#if pool}
 				<div class="rounded-full p-2">
 					<Water waterHeight={pool.prog / pool.target} />
 				</div>
 
 				<h1 class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl">
-					{(pool.prog / pool.target) * 100}%
+					{((pool.prog / pool.target) * 100).toFixed(0)}%
 				</h1>
 			{/if}
 		</div>
@@ -111,6 +134,18 @@
 			<Separator/>
 			<h2 class="text-3xl text-[color:#77787E]">${pool.target}</h2>
 		</div>
-		
+		<ScrollArea class="h-[160px] w-3/4">
+			{#each pool.members as member}
+			<Card class="flex align-middle items-center h-20 touch-none select-none bg-foreground/5">
+				<div class="mx-2 h-[80%] aspect-square">
+					<Water waterHeight={member.paid / member.due}></Water>
+				</div>
+				<div>
+					<h1 class="text-2xl">{member.user.first_name} {member.user.last_name}</h1>
+					<p>${member.paid.toFixed(2)} / ${member.due.toFixed(2)}</p>
+				</div>
+			</Card>
+			{/each}
+		</ScrollArea>
 	{/if}
 </div>

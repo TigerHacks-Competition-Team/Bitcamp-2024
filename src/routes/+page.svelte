@@ -1,9 +1,8 @@
 <script lang="ts">
-	import { auth } from "$lib/api/firebase";
+	import { goto } from "$app/navigation";
 	import { onMount } from "svelte";
 
-	
+	onMount(()=>{
+		goto("/auth/sign-up");
+	})
 </script>
-
-<a href="auth/sign-in">Sign In</a>
-<a href="auth/sign-up">Sign Up</a>
