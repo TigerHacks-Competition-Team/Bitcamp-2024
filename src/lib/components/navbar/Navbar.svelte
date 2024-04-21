@@ -13,7 +13,7 @@
 
 <div class="w-full h-[100px] px-[30px] py-[20px]
             fixed bottom-0 flex justify-between
-            border-border border-t bg-background">
+            border-border border-t bg-[#1e1e22]">
     <NavbarItem name="Pools" href="/home/">
         <DropletIcon size={30}/>
     </NavbarItem>
