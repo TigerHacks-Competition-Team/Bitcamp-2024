@@ -62,8 +62,6 @@
 			}),
 		})).json();
 
-		console.log(res);
-
 		goto('/').then(() => goto(`/home/${$page.params.slug}`));
 	}
 
