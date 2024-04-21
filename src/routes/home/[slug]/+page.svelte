@@ -38,7 +38,15 @@
 	};
 
 	let pool: Pool;
+	let addPoolAmount: number = 0;
+	let addPoolCardId: string = "";
+	let cards: any = {};
 	let pieContainer: HTMLDivElement;
+	let transactionPending = false;
+
+	const addToPool = () => {
+		transactionPending = true;
+	}
 
 	onMount(async () => {
 		pool = await getData();
@@ -66,8 +74,6 @@
 		let schemeDark2Darkend = [...schemeDark2];
 		schemeDark2Darkend.sort(() => Math.random() - 0.5);
 		schemeDark2Darkend[pool.members.length] = '#333333';
-
-		console.log(schemeDark2Darkend);
 
 		//const colors = scaleOrdinal().domain(Object.keys(data)).range(schemeDark2Darkend);
 		const pieChart = pie()
@@ -116,6 +122,10 @@
 
 			pool.members[i].user_id = mres.user;
 		}
+
+		cards = (await (await fetch(`/api/v1/user/${$user.uid}/cards`)).json()).cards;
+
+		console.log(cards);
 	});
 </script>
 
@@ -141,7 +151,7 @@
 		<div class="w-full h-full" id="pie-container" bind:this={pieContainer}></div>
 	</div>
 
-	{#if pool}
+	{#if pool && cards}
 		<div class="flex items-center content-between justify-evenly w-full">
 			<Dialog.Root>
 				<Dialog.Trigger>Add To Pool</Dialog.Trigger>
@@ -150,17 +160,19 @@
 						<Dialog.Title>Add To Pool</Dialog.Title>
 					</Dialog.Header>
 					<div class="flex flex-col justify-items-center">
-						<Input pattern="[0-9]" placeholder="Ammount"></Input>
+						<Input on:input={e => addPoolAmount = parseFloat(e.target.value)} placeholder="Ammount"></Input>
 
-						<Select.Root>
+						<Select.Root onSelectedChange={v => {addPoolCardId = v.value; console.log(addPoolAmount, addPoolCardId)}}>
 							<Select.Trigger class="w-[180px]">
-								<Select.Value placeholder="Select Merchant" />
+								<Select.Value placeholder="Select Card" />
 							</Select.Trigger>
 							<Select.Content>
-								<Select.Item>Card 1</Select.Item>
+								{#each cards as card}
+									<Select.Item value={card._id}>{card.nickname}</Select.Item>
+								{/each}
 							</Select.Content>
 						</Select.Root>
-						<Button>Confirm Payment</Button>
+						<Button on:click={addToPool} disabled={addPoolAmount == 0 || addPoolCardId == "" || transactionPending}>Confirm Payment</Button>
 					</div>
 				</Dialog.Content>
 			</Dialog.Root>
