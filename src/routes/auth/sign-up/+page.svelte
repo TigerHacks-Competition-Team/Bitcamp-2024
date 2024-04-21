@@ -65,6 +65,7 @@
 				body: JSON.stringify({
 					first_name: first_name,
 					last_name: last_name,
+					email: email,
 					address: address
 				})
 			})
@@ -182,8 +183,8 @@
 		>
 			<h1 class="text-3xl text-center opacity-0 pointer-events-none">Create Your Account</h1>
 			<div id="content-2" class="flex flex-col gap-2">
-				<Input placeholder="Password" />
-				<Input placeholder="Confirm Password" />
+				<Input placeholder="Password" type="password"/>
+				<Input placeholder="Confirm Password" type="password"/>
 				<Button variant="fancy" on:click={finalContent}>
 					<ArrowIcon size={20} color="#66A3EB" class="mr-1"/>
 					Sign Up
@@ -212,6 +213,6 @@
 			<Input id="city-text" placeholder="City" />
 			<Input id="zip-code-text" placeholder="Zip Code" />
 		</div>
-		<Button variant="fancy">Get Started</Button>
+		<Button variant="fancy" on:click={onSubmit}>Get Started</Button>
 	</div>
 </div>
