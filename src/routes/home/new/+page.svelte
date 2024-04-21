@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import { getUser, user } from '$lib/api/firebase';
-	import FancyButton from '$lib/components/FancyButton.svelte';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import { Card } from '$lib/components/ui/card';
 	import * as Command from '$lib/components/ui/command/index.js';
@@ -121,5 +120,6 @@
     <h1>Total</h1>
     <p>${total}</p>
     
-    <Button on:click={submitForm} disabled={isNaN(total) && selectedMerchantId != undefined}>Submit</Button>
+    {console.log(selectedMerchantId)}
+    <Button on:click={submitForm} disabled={isNaN(total) || selectedMerchantId == undefined}>Submit</Button>
 {/await}
