@@ -1,0 +1,28 @@
+/* TEAM */
+                            
+Josh E.
+Ruadhan KM
+Anh P
+Gus R
+
+                            
+Site: puddleapp.club  / https://github.com/TigerHacks-Competition-Team/
+
+                            
+Location: Washington D.C                            
+
+                            
+Name: Puddle
+                            
+/* SITE */
+
+                            
+Last update: 2024/4/20
+
+                            
+Standards: HTML5, CSS3, SvelteKit
+
+                            
+Software: VScode, Git, Windows Terminal Suite
+
+Made in 36 hours @ Bitcamp 2024
