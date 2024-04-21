@@ -3,12 +3,13 @@
 	import Input from "$lib/components/ui/input/input.svelte";
 	import Label from "$lib/components/ui/label/label.svelte";
 	import Separator from "$lib/components/ui/separator/separator.svelte";
-	import { signUpEmailAndPassword, auth } from "$lib/api/firebase";
-	import { updateProfile } from "firebase/auth";
-	import { toast } from "svelte-sonner";
+	import { signUpEmailAndPassword, auth, getUser } from "$lib/api/firebase";
 	import LoginIcon from "$lib/components/icons/LoginIcon.svelte";
 	import FancyButton from "$lib/components/FancyButton.svelte";
 	import { onMount } from "svelte";
+	import { updateProfile } from "firebase/auth";
+	import { toast } from "svelte-sonner";
+	import { goto } from "$app/navigation";
 
 	let name = "";
 	let email = "";
@@ -21,11 +22,22 @@
 					displayName: `${name}`,
 				});
 
-				if (!auth.currentUser) return;
-				await fetch("/api/v1/user", {
-					method: "POST",
-					headers: {
-						auth_token: auth.currentUser.uid,
+			const usr = await getUser();
+
+			await fetch("/api/v1/user", {
+				method: "POST",
+				headers: {
+					"auth_token": usr.uid,
+				},
+				body: JSON.stringify({
+					first_name: "John",
+					last_name: "Doe",
+					address: {
+						street_number: "123",
+						street_name: "Main St",
+						city: "Springfield",
+						state: "IL",
+						zip: "62701",
 					},
 					body: JSON.stringify({
 						first_name: "John",
@@ -38,11 +50,16 @@
 							zip: "62701",
 						},
 					}),
-				});
+				})
 			})
 			.catch(e => {
 				toast(`${e.name}: ${e.code}`);
 			});
+
+			goto("/home");
+		}).catch(e => {
+			toast(`${e.name}: ${e.code}`);
+		});
 	};
 
 	let currentContent = 1;

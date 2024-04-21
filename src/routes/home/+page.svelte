@@ -8,6 +8,7 @@
     import { user, getUser } from "$lib/api/firebase"
 	import type { User } from "firebase/auth";
 	import { browser } from "$app/environment";
+	import ScrollArea from "$lib/components/ui/scroll-area/scroll-area.svelte";
 
     const getData = async () => {
         if (!browser) return;
@@ -26,8 +27,6 @@
         for (const pool of res.pools) {
             pool.prog = pool.members.reduce((acc: number, cur: any) => acc + cur.paid, 0);
         }
-
-        console.log(res.pools)
         
         return res.pools;
 	}
@@ -38,19 +37,21 @@
 	...
 {:then data}
     {#if data}
-        {#each data as pool}
-            <a href={`home/${pool.id}`}>
-                <Card class="flex justify-between h-28 touch-none select-none">
-                    <CardHeader class="w-1/2">
-                        <CardTitle>{pool.name || "Unkown"}</CardTitle>
-                        <CardDescription>Progress: ${pool.prog} / ${pool.target || "Unkown"}</CardDescription>
-                    </CardHeader>
-                    <CardContent class="p-0 h-4/5 max-w-full aspect-square mr-4 self-center">
-                        <Water waterHeight={pool.prog / pool.target}></Water>
-                    </CardContent>
-                </Card>
-            </a>
-        {/each}
+        <ScrollArea class="h-[calc(100%-100px)]">
+            {#each data as pool}
+                <a href={`home/${pool.id}`}>
+                    <Card class="flex justify-between h-28 touch-none select-none bg-foreground/5">
+                        <CardHeader class="w-1/2">
+                            <CardTitle>{pool.name || "Unknown"}</CardTitle>
+                            <CardDescription class="text-[color:#B7BABE]">Progress: ${pool.prog} / ${pool.target || "Unkown"}</CardDescription>
+                        </CardHeader>
+                        <CardContent class="p-0 h-4/5 max-w-full aspect-square mr-4 self-center">
+                            <Water waterHeight={pool.prog / pool.target}></Water>
+                        </CardContent>
+                    </Card>
+                </a>
+            {/each}
+        </ScrollArea>
     {:else}
         Error fetching data!
     {/if}
