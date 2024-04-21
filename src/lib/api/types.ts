@@ -1,7 +1,7 @@
 type PoolMember = {
     due: number,
     paid: number,
-    user: string
+    user_id: string
 }
 
 type Pool = {

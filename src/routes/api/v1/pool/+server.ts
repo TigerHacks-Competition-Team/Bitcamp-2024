@@ -54,8 +54,6 @@ export async function POST(event: RequestEvent) {
 		member.paid = 0;
 	}
 
-    if(!members.includes(auth_token)) members.push(auth_token);
-
 	if (quant != target)
 		return new Response(stringify({ passed: false, error: "Dues don't match total" }), { status: 400 });
 

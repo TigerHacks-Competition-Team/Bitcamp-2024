@@ -43,6 +43,10 @@
 
 		ju = res.user;
 
+        ju.due = 0;
+        currentFriends[ju.id] = ju;
+        
+
 		for (const i in res.user.friends) {
 			const friendid: string = res.user.friends[i];
 
@@ -73,8 +77,8 @@
 				name: poolName,
 				members: Object.values(currentFriends).map((e) => ({ user_id: e.id, due: e.due })),
 				target: total,
-				dealine: Date.now() + 30 * 24 * 60 * 60 * 1000,
-				merchant_id: selectedMerchantId
+				deadline: Date.now() + 30 * 24 * 60 * 60 * 1000,
+				merchant: selectedMerchantId
 			})
 		});
 	};

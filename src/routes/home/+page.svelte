@@ -9,6 +9,8 @@
 	import type { User } from "firebase/auth";
 	import { browser } from "$app/environment";
 	import ScrollArea from "$lib/components/ui/scroll-area/scroll-area.svelte";
+    import { Skeleton } from "$lib/components/ui/skeleton";
+	import { onMount } from "svelte";
 
     const getData = async () => {
         if (!browser) return;
@@ -30,11 +32,18 @@
         
         return res.pools;
 	}
-
 </script>
 
-{#await getData()}
-	...
+{#await getData()}	
+    <Card class="flex justify-between h-28 touch-none select-none bg-foreground/5">
+        <CardHeader class="w-1/2">
+            <Skeleton class="h-4 w-[120px] my-2 mx-14" />
+            <Skeleton class="h-4 w-[170px] my-2 mx-14" />
+        </CardHeader>
+        <CardContent class="p-0 h-4/5 max-w-full aspect-square mr-4 self-center">
+            <Skeleton class="h-12 w-12 rounded-full -mx-52 my-5"/>
+        </CardContent>
+    </Card>
 {:then data}
     {#if data}
         <ScrollArea class="h-[calc(100%-100px)]">

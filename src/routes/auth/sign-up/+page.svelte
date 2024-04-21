@@ -65,6 +65,7 @@
 				body: JSON.stringify({
 					first_name: first_name,
 					last_name: last_name,
+					email: email,
 					address: address
 				})
 			})
@@ -173,28 +174,28 @@
 				</Button>
 			</div>
 			<Separator class="opacity-0 mt-3" />
-			<p class="text-muted-foreground text-xs text-center opacity-0">Already have an account? <a href="/auth/sign-in" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Log in instead.</a></p>
+			<p class="text-muted-foreground text-xs text-center opacity-0 pointer-events-none">Already have an account? Log in instead.</p>
 		</div>
 
 		<div
 			id="content-2-container"
 			class="flex flex-col gap-2 w-[80vw] absolute top-1/2 -translate-y-1/2 left-[calc(100vw+var(--left))] transition-all"
 		>
-			<h1 class="text-3xl text-center opacity-0">Create Your Account</h1>
+			<h1 class="text-3xl text-center opacity-0 pointer-events-none">Create Your Account</h1>
 			<div id="content-2" class="flex flex-col gap-2">
-				<Input placeholder="Password" />
-				<Input placeholder="Confirm Password" />
+				<Input placeholder="Password" type="password"/>
+				<Input placeholder="Confirm Password" type="password"/>
 				<Button variant="fancy" on:click={finalContent}>
 					<ArrowIcon size={20} color="#66A3EB" class="mr-1"/>
 					Sign Up
 				</Button>
 			</div>
-			<Separator class="opacity-0 mt-3" />
-			<p class="text-muted-foreground text-xs text-center opacity-0">Already have an account? Log in instead.</p>
+			<Separator class="opacity-0 mt-3 pointer-events-none" />
+			<p class="text-muted-foreground text-xs text-center opacity-0 pointer-events-none">Already have an account? Log in instead.</p>
 		</div>
 
 		<Separator />
-		<p class="text-muted-foreground text-xs text-center">Already have an account? Log in instead.</p>
+		<p class="text-muted-foreground text-xs text-center">Already have an account? <a href="/auth/sign-in" class="cursor-pointer text-primary-foreground hover:underline absolute z-10">Log in</a>Log in instead.</p>
 	</div>
 
 	<div class="absolute top-1/2 left-[150vw] -translate-x-1/2 -translate-y-1/2 flex flex-col gap-3 w-[80vw] transition-all" id="final-content">
@@ -212,6 +213,6 @@
 			<Input id="city-text" placeholder="City" />
 			<Input id="zip-code-text" placeholder="Zip Code" />
 		</div>
-		<Button variant="fancy">Get Started</Button>
+		<Button variant="fancy" on:click={onSubmit}>Get Started</Button>
 	</div>
 </div>
