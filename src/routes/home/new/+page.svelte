@@ -119,7 +119,6 @@
     
     <h1>Total</h1>
     <p>${total}</p>
-    
-    {console.log(selectedMerchantId)}
+
     <Button on:click={submitForm} disabled={isNaN(total) || selectedMerchantId == undefined}>Submit</Button>
 {/await}
