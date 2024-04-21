@@ -73,7 +73,7 @@
 
 <p class="text-primary-foreground mb-3">Wallet</p>
 {#await getData()}	
-
+	<h1 class="text-center">Loading Your wallet...</h1>
 {:then cards}
 	<div
 		class="flex flex-col gap-4 mx-3 overflow-y-scroll pb-[150px]"
