@@ -48,10 +48,11 @@ export async function POST(event: RequestEvent) {
 				"Content-Type": "application/json",
 			},
 			body: stringify({
-				type: "Checking",
-				nickname: "Main Account",
+				type: "Credit Card",
+				nickname: "Main Card",
 				rewards: 0,
 				balance: 500,
+				account_number: "1234567890123456"
 			}),
 		}
 	);
@@ -71,7 +72,7 @@ export async function POST(event: RequestEvent) {
 		pools: [],
 
 		nessie_customer: customer_data.objectCreated._id,
-		nessie_account: account_data.objectCreated._id,
+		cards: [account_data.objectCreated._id],
 
 		id: auth_token
 	});

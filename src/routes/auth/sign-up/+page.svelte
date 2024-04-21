@@ -173,7 +173,7 @@
 				</Button>
 			</div>
 			<Separator class="opacity-0 mt-3" />
-			<p class="text-muted-foreground text-xs text-center opacity-0">Already have an account? Log in instead.</p>
+			<p class="text-muted-foreground text-xs text-center opacity-0">Already have an account? <a href="/auth/sign-in" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Log in instead.</a></p>
 		</div>
 
 		<div
