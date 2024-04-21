@@ -7,6 +7,7 @@
 	import { goto } from '$app/navigation';
 	import LoginIcon from '$lib/components/icons/LoginIcon.svelte';
 	import { auth } from '$lib/api/firebase';
+	import Separator from '$lib/components/ui/separator/separator.svelte';
 
     let email = "";
     let password = "";
@@ -32,6 +33,8 @@
 				<LoginIcon size={20} color="#66A3EB" class="mr-1"/>
 				Sign In
 			</Button>
+			<Separator />
+			<p class="text-muted-foreground text-xs text-center">Need an account? <a href="/auth/sign-in" class="cursor-pointer text-primary-foreground hover:underline">Sign up</a> instead.</p>
 		</div>
 		<!-- <div>
 			<div>
