@@ -6,7 +6,7 @@
 	export let style: string = "";
 </script>
 
-<div class={`aspect-square border-2 rounded-full border-black w-full h-full flex flex-col overflow-hidden ${style}`}>
+<div class={`aspect-square border-2 bg-gray-700 rounded-full border-gray-400 w-full h-full flex flex-col overflow-hidden ${style}`}>
 	<svg
 		class="waves mt-auto"
 		xmlns="http://www.w3.org/2000/svg"
