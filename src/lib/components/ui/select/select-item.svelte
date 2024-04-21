@@ -18,7 +18,7 @@
 	{disabled}
 	{label}
 	class={cn(
-		"relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground data-[disabled]:opacity-50",
+		"relative border-b-[1px] border-[#2C2E31] flex w-full cursor-default select-none items-center py-1.5 pl-8 pr-2 text-sm outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-[#2A2B30] data-[highlighted]:text-accent-foreground data-[disabled]:opacity-50",
 		className
 	)}
 	{...$$restProps}
