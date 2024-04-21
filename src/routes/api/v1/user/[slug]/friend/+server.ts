@@ -17,7 +17,7 @@ export async function POST(event: RequestEvent) {
     if (user.friend_requests.includes(req.friend_id) || user.friends.includes(req.friend_id))
         return new Response(stringify({ passed: false, error: "Friend request already sent" }), { status: 400 });
     
-    user.friend_requests.push(req.friend_id);
+    user.friends.push(req.friend_id);
     await setDoc(doc(store, `users/${user.id}`), user);
 
     return new Response(stringify({ passed: true }), { status: 200 });
