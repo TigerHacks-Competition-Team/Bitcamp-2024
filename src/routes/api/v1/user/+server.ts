@@ -67,6 +67,7 @@ export async function POST(event: RequestEvent) {
 	await setDoc(doc(store, `users/${auth_token}`), {
 		...nessie_req,
 		friends: [],
+        friend_requests: [],
 		pools: [],
 
 		nessie_customer: customer_data.objectCreated._id,

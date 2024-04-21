@@ -17,7 +17,7 @@
 			});
 
 			if (!auth.currentUser) return;
-			await fetch("/api/v1/create_user", {
+			await fetch("/api/v1/user", {
 				method: "POST",
 				headers: {
 					"auth_token": auth.currentUser.uid,
