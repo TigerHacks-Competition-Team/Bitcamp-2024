@@ -10,7 +10,7 @@
 	class="toaster group"
 	toastOptions={{
 		classes: {
-			toast: "group toast group-[.toaster]:bg-background group-[.toaster]:text-foreground group-[.toaster]:border-border group-[.toaster]:shadow-lg",
+			toast: "bg-[#1e1e22] rounded-[6px] border-solid border-[#252529] border-[2px] font-sans group toast group-[.toaster]:bg-background group-[.toaster]:text-foreground group-[.toaster]:border-border group-[.toaster]:shadow-lg",
 			description: "group-[.toast]:text-muted-foreground",
 			actionButton: "group-[.toast]:bg-primary group-[.toast]:text-primary-foreground",
 			cancelButton: "group-[.toast]:bg-muted group-[.toast]:text-muted-foreground",
