@@ -1,5 +1,4 @@
 <script lang="ts">
-    import "@fontsource/poppins/300.css";
 	import { browser } from "$app/environment";
 	import { auth, getUser } from "$lib/api/firebase";
 	import type { User } from "firebase/auth";
@@ -46,11 +45,11 @@
                 </svg>
             </div>
         </div>
-        <h1 class="scroll-m-20 font-extrabold tracking-tight lg:text-5xl font-[Poppins] [color:#B7BABE] text-3xl">{juser.first_name} {juser.last_name}</h1>
-        <h1 class="scroll-m-20 font-extrabold tracking-tight lg:text-5xl font-[Poppins] [color:#77787E] text-xl">{$user?.email}</h1>
+        <h1 class="scroll-m-20 font-extrabold tracking-tight lg:text-5xl text-[color:#B7BABE] text-3xl">{juser.first_name} {juser.last_name}</h1>
+        <h1 class="scroll-m-20 font-extrabold tracking-tight lg:text-5xl text-[color:#77787E] text-xl">{$user?.email}</h1>
         <span class="h-8"/>
-        <h1 class="scroll-m-20 font-extrabold tracking-tight lg:text-5xl font-[Poppins] [color:#77787E] text-xl">{juser.address.city}, {juser.address.state}</h1>
-        <h1 class="scroll-m-20 font-extrabold tracking-tight lg:text-5xl font-[Poppins] [color:#77787E] text-xl">{juser.address.street_number} {juser.address.street_name} {juser.address.zip}</h1>
+        <h1 class="scroll-m-20 font-extrabold tracking-tight lg:text-5xl text-[color:#77787E] text-xl">{juser.address.city}, {juser.address.state}</h1>
+        <h1 class="scroll-m-20 font-extrabold tracking-tight lg:text-5xl text-[color:#77787E] text-xl">{juser.address.street_number} {juser.address.street_name} {juser.address.zip}</h1>
         <Button class="m-4" on:click={logOut}>Log Out</Button>
     </div>
 {/await}

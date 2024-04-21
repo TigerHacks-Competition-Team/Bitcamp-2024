@@ -10,7 +10,7 @@
 
 <a {href}>
     <div class={`flex flex-col items-center w-min ${className}`}>
-        {#if $page.url.pathname == href}
+        {#if $page.url.pathname.substring(6) == (href.substring(6))}
             <div class="navbarSelected">
                 <slot />
             </div>

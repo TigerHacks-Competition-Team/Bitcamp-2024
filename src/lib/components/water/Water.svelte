@@ -6,9 +6,9 @@
 	export let style: string = "";
 </script>
 
-<div class={`aspect-square border-2 bg-gray-700 rounded-full border-gray-400 w-full h-full flex flex-col overflow-hidden ${style}`}>
+<div class={`aspect-square bg-background rounded-full w-full h-full flex flex-col overflow-hidden ${style}`}>
 	<svg
-		class="waves mt-auto"
+		class="waves mt-auto drop-shadow-blue-glow"
 		xmlns="http://www.w3.org/2000/svg"
 		xmlns:xlink="http://www.w3.org/1999/xlink"
 		viewBox="0 0 150 150"
@@ -18,6 +18,7 @@
 		<defs>
 			<path
 				id="gentle-wave"
+				class="drop-shadow-blue-glow"
 				d={`M-160 ${(1-waterHeight) * 140 - 10} c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v150h-352z`}
 			/>
 		</defs>

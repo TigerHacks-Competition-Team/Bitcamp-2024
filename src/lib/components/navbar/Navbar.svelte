@@ -7,7 +7,6 @@
 	import PersonOutlineIcon from "../icons/PersonOutlineIcon.svelte";
 	import CreditCardOutlineIcon from "../icons/CreditCardOutlineIcon.svelte";
     import Gradient from "../icons/Gradient.svelte";
-	import { page } from "$app/stores";
 </script>
 
 <Gradient id="navbarIconSelectGrad"/>
@@ -15,7 +14,7 @@
 <div class="w-full h-[100px] px-[30px] py-[20px]
             fixed bottom-0 flex justify-between
             border-border border-t bg-background">
-    <NavbarItem name="Pools" href="/home">
+    <NavbarItem name="Pools" href="/home/">
         <DropletIcon size={30}/>
     </NavbarItem>
 
