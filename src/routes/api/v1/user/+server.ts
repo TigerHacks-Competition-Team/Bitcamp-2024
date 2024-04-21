@@ -74,7 +74,8 @@ export async function POST(event: RequestEvent) {
 		nessie_customer: customer_data.objectCreated._id,
 		cards: [{
 			id: account_data.objectCreated._id,
-			expiration: "08/25"
+			expiration: "08/25",
+			name: nessie_req.first_name + " " + nessie_req.last_name,
 		}],
 
 		id: auth_token,
