@@ -6,7 +6,7 @@
 	export let style: string = "";
 </script>
 
-<div class={`relative aspect-square bg-background rounded-full w-full h-full flex flex-col overflow-hidden ${style}`}>
+<div class={`relative aspect-square bg-[rgba(255,255,255,0.1)] border-2 border-[rgba(255,255,255,0.2)] rounded-full w-full h-full flex flex-col overflow-hidden ${style}`}>
 	<div class="absolute w-full h-full" style="transform: translate(0%, {(1-waterHeight)*100}%);">
 		<svg
 			class="waves mt-auto drop-shadow-blue-glow"
