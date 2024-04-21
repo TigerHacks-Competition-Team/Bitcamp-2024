@@ -170,7 +170,7 @@
 							<Input
 								class="text-xs h-8"
 								on:input={e => (currentFriends[friend.id].due = parseInt(e?.target?.value))}
-								placeholder="Amount Due..."
+								placeholder="Amount Due"
 							/>
 						</div>
 					</div>
