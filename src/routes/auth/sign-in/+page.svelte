@@ -5,6 +5,7 @@
 	import { Button } from '$lib/components/ui/button';
 	import { toast } from 'svelte-sonner';
 	import { goto } from '$app/navigation';
+	import FancyButton from '$lib/components/FancyButton.svelte';
 
     let email = "";
     let password = "";
@@ -20,7 +21,13 @@
 
 <div>
 	<form on:submit|preventDefault={onSubmit}>
-		<div>
+		<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col gap-2 w-[80vw]">
+			<h1 class="text-3xl text-center mb-2">Log In</h1>
+			<Input placeholder="Email"/>
+			<Input placeholder="Password" type="password" class="mb-2"/>
+			<FancyButton text="Sign In" icon="login"/>
+		</div>
+		<!-- <div>
 			<div>
 				<div>
 					<Label for="email">Email</Label>
@@ -48,7 +55,7 @@
 				</div>
 				<Button type="submit">Sign in</Button>
 			</div>
-		</div>
+		</div> -->
 	</form>
 	<a href="/">Back</a>
 </div>

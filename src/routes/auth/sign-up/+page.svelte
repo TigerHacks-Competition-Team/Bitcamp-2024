@@ -148,7 +148,7 @@
 			<Input placeholder="City" />
 			<Input placeholder="Zip Code" />
 		</div>
-		<FancyButton text="Get Started" icon="none" />
+		<FancyButton text="Get Started" icon="none" class="mt-2"/>
 	</div>
 
 	<!-- <form on:submit|preventDefault={onSubmit}>
