@@ -54,6 +54,8 @@
 			return;
 		}
 
+		(document.getElementById("submit-btn") as HTMLButtonElement).disabled = true;
+
 		signUpEmailAndPassword(email, password)
 			.then(async e => {
 				await updateProfile(e.user, {
@@ -233,6 +235,6 @@
 			<Input id="city-text" placeholder="City" />
 			<Input id="zip-code-text" placeholder="Zip Code" />
 		</div>
-		<Button variant="fancy" on:click={onSubmit}>Get Started</Button>
+		<Button id="submit-btn" variant="fancy" on:click={onSubmit}>Get Started</Button>
 	</div>
 </div>

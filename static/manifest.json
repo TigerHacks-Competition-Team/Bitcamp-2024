@@ -6,6 +6,7 @@
     "background_color": "#1D1D21",
     "theme_color": "#66A3EB",
     "description": "Dividing costs among friends made easy",
+    "scope": "/",
     "icons": [
         {
             "src": "logo-1024.png",
