@@ -9,7 +9,7 @@
 </script>
 
 <Toaster />
-<div class="h-screen p-4">
+<div class="h-[calc(100vh-100px)] p-4">
 	<slot/>
 </div>
 
