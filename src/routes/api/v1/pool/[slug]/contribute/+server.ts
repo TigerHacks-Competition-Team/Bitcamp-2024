@@ -24,7 +24,7 @@ export async function POST(event: RequestEvent) {
     const true_payment = Math.min(req.amount, member_instance.due - member_instance.paid);
 
 
-    const account_data = await (await fetch(`http://api.nessieisreal.com/accounts/${member_instance.account_id}`)).json();
+    const account_data = await (await fetch(`http://api.nessieisreal.com/accounts/${req.account_id}`)).json();
 
     if(account_data.balance < true_payment)
         return new Response(JSON.stringify({passed: false, error: "Not enough funds"}), { status: 403 });
@@ -39,7 +39,7 @@ export async function POST(event: RequestEvent) {
         description: `Contribbution to ${pool.name}`
     }
 
-    const transfer = await(await fetch(`http://api.nessieisreal.com/accounts/${member_instance.account_id}/transfers?key=${nessie_key}`, {
+    const transfer = await(await fetch(`http://api.nessieisreal.com/accounts/${req.account_id}/transfers?key=${nessie_key}`, {
         method: "POST",
         body: JSON.stringify(transfer_data)
     })).json();

@@ -5,7 +5,8 @@
 	import { Button } from '$lib/components/ui/button';
 	import { toast } from 'svelte-sonner';
 	import { goto } from '$app/navigation';
-	import FancyButton from '$lib/components/FancyButton.svelte';
+	import LoginIcon from '$lib/components/icons/LoginIcon.svelte';
+	import { auth } from '$lib/api/firebase';
 
     let email = "";
     let password = "";
@@ -14,8 +15,10 @@
         signInEmailAndPassword(email, password).catch(e => {
 			toast(`${e.name}: ${e.code}`);
 		}).then(() => {
-			goto("/home");
-		});;
+
+			if(auth.currentUser)
+				goto("/home");
+		});
     }
 </script>
 
@@ -23,9 +26,12 @@
 	<form on:submit|preventDefault={onSubmit}>
 		<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col gap-2 w-[80vw]">
 			<h1 class="text-3xl text-center mb-2">Log In</h1>
-			<Input placeholder="Email"/>
-			<Input placeholder="Password" type="password" class="mb-2"/>
-			<FancyButton text="Sign In" icon="login"/>
+			<Input placeholder="Email" bind:value={email}/>
+			<Input placeholder="Password" type="password" class="mb-2" bind:value={password}/>
+			<Button variant="fancy" type="submit">
+				<LoginIcon size={20} color="#66A3EB" class="mr-1"/>
+				Sign In
+			</Button>
 		</div>
 		<!-- <div>
 			<div>
