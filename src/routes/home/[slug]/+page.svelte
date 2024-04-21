@@ -243,11 +243,13 @@
 					{/if}
 				</Dialog.Content>
 			</Dialog.Root>
-			<div class="w-24 flex flex-row gap-2 items-center">
+			<div class="w-24 flex flex-col gap-2 items-center">
 				<h2 class="text-3xl text-[color:#B7BABE]">${pool.prog}</h2>
-				<h2 class="text-3xl text-[color:#77787E]">/ ${pool.target}</h2>
+				<Separator />
+				<h2 class="text-3xl text-[color:#77787E]">${pool.target}</h2>
 			</div>
 		</div>
+		<ScrollArea class="h-[160px] w-full px-2 mt-2">
 		<div class="flex flex-col w-full">
 			<!-- <ScrollArea class="h-[160px] w-full px-2 mt-2"> -->
 				{#each pool.members as member}
