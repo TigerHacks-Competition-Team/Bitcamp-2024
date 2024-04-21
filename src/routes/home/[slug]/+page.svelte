@@ -52,9 +52,11 @@
 		const data: { [key: string]: number } = { };
 		
 		for (const member of pool.members) {
-			data[member.user + "_PAID"] = member.paid;
-			data[member.user + "_UNPAID"] = member.due - member.paid;
+			data[member.user_id + "_PAID"] = member.paid;
+			data[member.user_id + "_UNPAID"] = member.due - member.paid;
 		}
+
+		console.log(data);
 
 		const colors = scaleOrdinal().domain(Object.keys(data)).range(new Array(16).fill(0).map((_, i) => i%2==0 ? schemeDark2[i/2] : "#333333"));
 		const pieChart = pie()
@@ -91,7 +93,7 @@
 			.style("filter", "url(#glow)");
 		
 		for (const i in pool.members) {
-            const memberid = pool.members[i].user;
+            const memberid = pool.members[i].user_id;
 
             const mres = await (
                 await fetch('/api/v1/user/' + memberid, {
@@ -101,7 +103,7 @@
                 })
             ).json();
 
-            pool.members[i].user = mres.user
+            pool.members[i].user_id = mres.user
         }
 	});
 </script>
@@ -141,7 +143,7 @@
 					<Water waterHeight={member.paid / member.due}></Water>
 				</div>
 				<div>
-					<h1 class="text-2xl">{member.user.first_name} {member.user.last_name}</h1>
+					<h1 class="text-2xl">{member.user_id.first_name} {member.user_id.last_name}</h1>
 					<p>${member.paid.toFixed(2)} / ${member.due.toFixed(2)}</p>
 				</div>
 			</Card>
