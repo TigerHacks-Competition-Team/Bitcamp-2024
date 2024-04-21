@@ -13,6 +13,7 @@
 	import * as Dialog from "$lib/components/ui/dialog/index.js";
 	import { buttonVariants } from "$lib/components/ui/button";
 	import Avatar from "$lib/components/Avatar.svelte";
+	import { goto } from "$app/navigation";
 
 	let currentFriends: { [key: string]: any } = {};
 	let total = 0;
@@ -70,7 +71,7 @@
 	const submitForm = async () => {
 		if (!$user) return;
 
-		fetch("/api/v1/pool", {
+		await fetch("/api/v1/pool", {
 			method: "POST",
 			headers: {
 				auth_token: $user.uid,
@@ -83,6 +84,7 @@
 				merchant: selectedMerchantId,
 			}),
 		});
+		goto("/home?message=created")
 	};
 
 	const selectMerchant = (v: any) => {

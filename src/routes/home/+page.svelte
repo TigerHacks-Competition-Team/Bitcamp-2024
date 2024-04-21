@@ -52,7 +52,7 @@
     {#if data}
         {#if data.length == 0}
             <h1 class="text-center">Theres nothing here...</h1>
-            <h2>Click the bright blue button to start a pool!</h2>
+            <h2 class="text-center">Click the bright blue button to start a pool!</h2>
         {/if}
         <ScrollArea class="h-[calc(100%-100px)]">
             {#each data as pool}
