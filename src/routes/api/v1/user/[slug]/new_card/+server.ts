@@ -23,7 +23,7 @@ export async function POST(event: RequestEvent) {
             balance: 500,
             account_number: "1234567890123456"
         }),
-    })).json()).createdObject._id;
+    })).json()).objectCreated._id;
 
     await updateDoc(doc(store, `users/${user.id}`), { 
         cards: [...user.cards, account_id]

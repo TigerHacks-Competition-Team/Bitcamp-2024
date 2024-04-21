@@ -25,7 +25,7 @@ export async function POST(event: RequestEvent) {
 	if (
 		!validate(req, {
 			name: "string",
-			members: "array",
+			members: "object",
 
 			target: "number",
 			deadline: "number",
@@ -78,7 +78,7 @@ export async function POST(event: RequestEvent) {
 				},
 			}),
 		}
-	)).json()).createdObject._id;
+	)).json()).objectCreated._id;
 
 	const account_id = (await(await fetch(
 		`http://api.nessieisreal.com/customers/${customer_id}/accounts?key=${VITE_FB_NESSIE_API}}`,
