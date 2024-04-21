@@ -26,6 +26,10 @@
 
         if(!res.passed) return; //FIXME: Handle error
 
+        res.pools = res.pools.filter((e: any) => {
+            return e != null;
+        })
+
         for (const pool of res.pools) {
             pool.prog = pool.members.reduce((acc: number, cur: any) => acc + cur.paid, 0);
         }

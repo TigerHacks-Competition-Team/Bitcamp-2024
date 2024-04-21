@@ -142,9 +142,9 @@
 			<Separator/>
 			<h2 class="text-3xl text-[color:#77787E]">${pool.target}</h2>
 		</div>
-		<ScrollArea class="h-[160px] w-3/4">
+		<ScrollArea class="h-[160px] w-full px-2 mt-2">
 			{#each pool.members as member}
-			<Card class="flex align-middle items-center h-20 touch-none select-none bg-foreground/5">
+			<Card class="flex align-middle items-center h-20 touch-none select-none bg-foreground/5 mt-4">
 				<div class="mx-2 h-[80%] aspect-square">
 					<Water waterHeight={member.paid / member.due}></Water>
 				</div>

@@ -5,6 +5,7 @@
 	import * as Dialog from "$lib/components/ui/dialog";
 	import { Input } from "$lib/components/ui/input";
 	import FriendCard from "./FriendCard.svelte";
+	import { toast } from "svelte-sonner";
 
 	const getFriends = async () => {
 		if (!browser) return;
@@ -33,7 +34,7 @@
 			).json();
 
 			res.user.friends[i] = fres.user;
-			res.user.friends[i].due = 0;
+			//res.user.friends[i].due = 0;
 		}
 
 		return res.user.friends;
@@ -42,16 +43,34 @@
     let emailToAdd = "";
     let open = false;
 
-    const addFriend = () => {
+    const addFriend = async () => {
+		const friendId = await(
+			await fetch(`/api/v1/user/get_id_from_email`, {
+				method: "POST",
+				headers: {
+					auth_token: $user!.uid,
+				},
+				body: JSON.stringify({
+					email: emailToAdd
+				})
+			})
+		).json();
+
+		if (friendId["passed"] == false) {
+			toast.error("Cannot find user");
+		}
+
         fetch(`/api/v1/user/${$user!.uid}/friend`, {
             method: "POST",
             headers: {
                 auth_token: $user!.uid
             },
             body: JSON.stringify({
-                friend_email: emailToAdd 
+                friend_id: friendId["id"]
             })
         })
+
+		toast.success("Friend added!");
 
         open = false;
     }
