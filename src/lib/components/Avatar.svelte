@@ -4,9 +4,10 @@
     export let lastName = "";
 	export let editable = false;
 	export let size = 120;
+	export let shadow = false;
 </script>
 
-<div class={"relative aspect-square rounded-full"} style={"background: linear-gradient(to bottom, #414142, #333235);"+`width:${size}px; height:${size}px`}>
+<div class={"relative aspect-square rounded-full"} style={"background: linear-gradient(to bottom, #414142, #333235);"+`width:${size}px; height:${size}px; ${shadow ? 'box-shadow: #17181d 0 0 0 '+Math.round(size/10)+'px':''}`}>
 	<div class="absolute rounded-full" style={`background: radial-gradient(72.86% 72.86% at 50% 100%, #323234 0%, rgba(50, 50, 52, 0.00) 100%), #26262B; inset:${Math.round(size/30)}px`}></div>
 	<p class={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`} style={`font-size: ${Math.round(size/3)}px`}>{firstName[0].toUpperCase()}{lastName[0].toUpperCase()}</p>
 	{#if editable}
@@ -25,6 +26,9 @@
 				/>
 			</svg>
 		</div>
+		<!-- {#if shadow}
+			<div class={`bg-[#17181d] absolute top-[65%] left-[calc(65%-${Math.round(size/)}px)] w-1/3 aspect-square rounded-full box-content -z-10`} style={`border: solid red ${Math.round(size/30)}px`} />
+		{/if} -->
 	{/if}
 </div>
 
