@@ -8,6 +8,7 @@
 	import { onMount } from "svelte";
 	import FriendCard from "./FriendCard.svelte";
 	import { toast } from "svelte-sonner";
+	import { goto } from "$app/navigation";
 
 	let friends: User[];
 	let friendRequests: User[];
@@ -65,6 +66,8 @@
 
 		friends = friends.filter((e) => {return e != null});
 		friendRequests = friendRequests.filter((e) => {return e != null})
+
+		console.log(friendRequests)
 	};
 
 	let emailToAdd = "";
@@ -100,12 +103,16 @@
 		toast.success("Friend request sent!");
 
 		open = false;
+
+		goto('/home').then(() => goto("/home/friends"))
 	};
 
-	const addFriend = (id: string) => {
-		console.log(id)
+	let disableAdd = false;
 
-		fetch(`/api/v1/user/${$user!.uid}/accept_request`, {
+	const addFriend = async (id: string) => {
+		disableAdd = true;
+
+		await fetch(`/api/v1/user/${$user!.uid}/accept_request`, {
 			method: "POST",
 			headers: {
 				auth_token: $user!.uid,
@@ -116,6 +123,8 @@
 		});
 
 		toast.success("Friend added!");
+
+		goto('/home').then(() => goto("/home/friends"))
 	}
 
 	onMount(() => {
@@ -167,7 +176,7 @@
 						</Dialog.Header>
 	
 						<Dialog.Footer>
-							<Button variant="fancy" on:click={() => addFriend(friend.id)}>Add</Button>
+							<Button disabled={disableAdd} variant="fancy" on:click={() => addFriend(friend.id)}>Add</Button>
 							<Button variant="fancy">Cancel</Button>
 						</Dialog.Footer>
 					</Dialog.Content>
