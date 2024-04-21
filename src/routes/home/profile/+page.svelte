@@ -41,15 +41,15 @@
             <h1 class="text-[color:#B7BABE] text-3xl text-center">{juser.first_name} {juser.last_name}</h1>
             <h1 class="text-[color:#77787E] text-xl text-center">{$user?.email}</h1>
         </div>
-        <div class="grid grid-cols-2 gap-3">
+        <div class="grid grid-cols-2 gap-x-3 w-max">
             <p class="text-[#77787E] text-right">State</p>
-            <p class="text-[#B7BABE]">${juser.address.state}</p>
+            <p class="text-[#B7BABE]">{juser.address.state}</p>
             <p class="text-[#77787E] text-right">City</p>
-            <p class="text-[#B7BABE]">${juser.address.city}</p>
+            <p class="text-[#B7BABE]">{juser.address.city}</p>
             <p class="text-[#77787E] text-right">ZIP Code</p>
-            <p class="text-[#B7BABE]">${juser.address.zip}</p>
+            <p class="text-[#B7BABE]">{juser.address.zip}</p>
             <p class="text-[#77787E] text-right">Address</p>
-            <p class="text-[#B7BABE]">${juser.address.street_name} ${juser.address.street_number}</p>
+            <p class="text-[#B7BABE]">{juser.address.street_number} {juser.address.street_name}</p>
         </div>
         <!-- <h1 class="scroll-m-20 font-extrabold tracking-tight lg:text-5xl text-[color:#77787E] text-xl">{juser.address.city}, {juser.address.state}</h1> -->
         <!-- <h1 class="scroll-m-20 font-extrabold tracking-tight lg:text-5xl text-[color:#77787E] text-xl">{juser.address.street_number} {juser.address.street_name} {juser.address.zip}</h1> -->
