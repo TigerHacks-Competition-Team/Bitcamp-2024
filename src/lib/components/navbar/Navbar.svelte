@@ -35,10 +35,10 @@
         <CreditCardOutlineIcon size={30}/>
     </NavbarItem>
 
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+    <a href="/home/new" class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <Button variant="outline" class=" w-[60px] h-[60px] bg-gradient-blue-vertical drop-shadow-blue-glow rounded-full">
             <PlusOutlineIcon size={40}></PlusOutlineIcon>
         </Button>
-    </div>
+    </a>
     
 </div>
