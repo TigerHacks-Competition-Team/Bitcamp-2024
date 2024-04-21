@@ -10,6 +10,7 @@
 	import { updateProfile } from "firebase/auth";
 	import { toast } from "svelte-sonner";
 	import { goto } from "$app/navigation";
+	import ArrowIcon from "$lib/components/icons/ArrowIcon.svelte";
 
 	let name = "";
 	let email = "";
@@ -167,7 +168,10 @@
 			<h1 class="text-3xl text-center opacity-0">Create Your Account</h1>
 			<div id="content-1" class="flex flex-col gap-2">
 				<Input placeholder="Email Address" />
-				<FancyButton text="Sign Up" icon="login" on:click={nextContent} />
+				<Button variant="fancy" on:click={nextContent}>
+					<LoginIcon size={20} color="#66A3EB" class="mr-1"/>
+					Sign Up
+				</Button>
 			</div>
 			<Separator class="opacity-0 mt-3" />
 			<p class="text-muted-foreground text-xs text-center opacity-0">Already have an account? Log in instead.</p>
@@ -179,9 +183,12 @@
 		>
 			<h1 class="text-3xl text-center opacity-0">Create Your Account</h1>
 			<div id="content-2" class="flex flex-col gap-2">
-				<Input placeholder="Password" type="password"/>
-				<Input placeholder="Confirm Password" type="password"/>
-				<FancyButton text="Next" icon="arrow" on:click={finalContent} class="mt-1"/>
+				<Input placeholder="Password" />
+				<Input placeholder="Confirm Password" />
+				<Button variant="fancy" on:click={finalContent}>
+					<ArrowIcon size={20} color="#66A3EB" class="mr-1"/>
+					Sign Up
+				</Button>
 			</div>
 			<Separator class="opacity-0 mt-3" />
 			<p class="text-muted-foreground text-xs text-center opacity-0">Already have an account? Log in instead.</p>
@@ -206,49 +213,6 @@
 			<Input id="city-text" placeholder="City" />
 			<Input id="zip-code-text" placeholder="Zip Code" />
 		</div>
-		<FancyButton text="Get Started" icon="none" class="mt-2"on:click={onSubmit}/>
+		<Button variant="fancy">Get Started</Button>
 	</div>
-
-	<!-- <form on:submit|preventDefault={onSubmit}>
-		<div>
-			<div>
-                <div>
-                    <Label for="email">Name</Label>
-					<Input
-						id="email"
-						placeholder="John Appleseed"
-						autocapitalize="none"
-						autocorrect="off"
-						bind:value={name}
-					/>
-                </div>
-				<div>
-					<Label for="email">Email</Label>
-					<Input
-						id="email"
-						placeholder="johnny@appleseed.com"
-						type="email"
-						autocapitalize="none"
-						autocomplete="email"
-						autocorrect="off"
-						bind:value={email}
-					/>
-				</div>
-				<div>
-					<Label for="password">Password</Label>
-					<Input
-						id="password"
-						placeholder=""
-						type="password"
-						autocapitalize="none"
-						autocomplete="password"
-						autocorrect="off"
-						bind:value={password}
-					/>
-				</div>
-				<Button type="submit">Sign up</Button>
-			</div>
-		</div>
-	</form>
-	<a href="/">Back</a> -->
 </div>

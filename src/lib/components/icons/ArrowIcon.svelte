@@ -6,7 +6,7 @@
 	export { className as class };
 </script>
 
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style={`width: ${size}px`} 
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style={`width: ${size}px`} class={className}
 	><g data-name="Layer 2"
 		><g data-name="arrow-forward"
 			><rect fill={color} width="24" height="24" transform="rotate(-90 12 12)" opacity="0" /><path fill={color}

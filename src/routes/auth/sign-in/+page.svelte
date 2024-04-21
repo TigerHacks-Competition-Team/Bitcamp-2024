@@ -53,7 +53,7 @@
 						bind:value={password}
 					/>
 				</div>
-				<Button type="submit">Sign in</Button>
+				<Button variant="fancy" type="submit">Sign in</Button>
 			</div>
 		</div> -->
 	</form>

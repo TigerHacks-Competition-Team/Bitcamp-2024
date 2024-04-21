@@ -48,6 +48,6 @@
         <span class="h-8"/>
         <h1 class="scroll-m-20 font-extrabold tracking-tight lg:text-5xl text-[color:#77787E] text-xl">{juser.address.city}, {juser.address.state}</h1>
         <h1 class="scroll-m-20 font-extrabold tracking-tight lg:text-5xl text-[color:#77787E] text-xl">{juser.address.street_number} {juser.address.street_name} {juser.address.zip}</h1>
-        <Button class="m-4" on:click={logOut}>Log Out</Button>
+        <Button class="m-4" variant="fancy" on:click={logOut}>Log Out</Button>
     </div>
 {/await}
