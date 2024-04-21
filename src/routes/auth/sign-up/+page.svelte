@@ -181,7 +181,7 @@
 			<div id="content-2" class="flex flex-col gap-2">
 				<Input placeholder="Password" type="password"/>
 				<Input placeholder="Confirm Password" type="password"/>
-				<FancyButton text="Next" icon="arrow" on:click={finalContent}/>
+				<FancyButton text="Next" icon="arrow" on:click={finalContent} class="mt-1"/>
 			</div>
 			<Separator class="opacity-0 mt-3" />
 			<p class="text-muted-foreground text-xs text-center opacity-0">Already have an account? Log in instead.</p>
