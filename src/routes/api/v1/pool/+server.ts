@@ -81,7 +81,7 @@ export async function POST(event: RequestEvent) {
 	)).json()).objectCreated._id;
 
 	const account_id = (await(await fetch(
-		`http://api.nessieisreal.com/customers/${customer_id}/accounts?key=${nessie_key}}`,
+		`http://api.nessieisreal.com/customers/${customer_id}/accounts?key=${nessie_key}`,
 		{
 			method: "POST",
 			headers: {
