@@ -18,9 +18,13 @@
 	let poolName = '';
 	$: total = Object.values(currentFriends).reduce((acc, cur) => acc + cur.due, 0);
 
-	const merchants: { [key: string]: string } = {
-		id: 'name'
-	};
+    const merchants: {[key: string]: string} = {
+        "6624d2429683f20dd5189aab": "Olive Garden",
+        "6624d27f9683f20dd5189aad": "McDonalds",
+        "6624d2a79683f20dd5189ab0": "Doordash",
+        "6624d2899683f20dd5189aae": "Landlord",
+        "6624d2989683f20dd5189aaf": "Micheal"
+    }
 
 	const getData = async () => {
 		if (!browser) return;

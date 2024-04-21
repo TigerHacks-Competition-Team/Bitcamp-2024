@@ -9,7 +9,7 @@
 </script>
 
 <Toaster />
-<div class="h-screen p-4 bg-background">
+<div class="h-screen p-4">
 	<slot/>
 </div>
 

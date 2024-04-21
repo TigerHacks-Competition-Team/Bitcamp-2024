@@ -59,11 +59,6 @@ export async function POST(event: RequestEvent) {
 	if (quant != target)
 		return new Response(stringify({ passed: false, error: "Dues don't match total" }), { status: 400 });
 
-	const merchant_doc = await getDoc(doc(store, `merchants/${merchant}`));
-
-	if (!merchant_doc.exists)
-		return new Response(stringify({ passed: false, error: "Merchant not found" }), { status: 404 });
-
 	const customer_id = (await (await fetch(
 		`http://api.nessieisreal.com/customers?key=${VITE_FB_NESSIE_API}`,
 		{

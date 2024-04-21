@@ -34,13 +34,25 @@
 {#await getData()}
     ...
 {:then juser} 
-    <div class="w-full flex justify-center p-20 pt-12 flex-col items-center">
-        <Avatar firstName={juser.first_name[0]} lastName={juser.last_name[0]}/>
-        <h1 class="scroll-m-20 font-extrabold tracking-tight lg:text-5xl text-[color:#B7BABE] text-3xl">{juser.first_name} {juser.last_name}</h1>
-        <h1 class="scroll-m-20 font-extrabold tracking-tight lg:text-5xl text-[color:#77787E] text-xl">{$user?.email}</h1>
-        <span class="h-8"/>
-        <h1 class="scroll-m-20 font-extrabold tracking-tight lg:text-5xl text-[color:#77787E] text-xl">{juser.address.city}, {juser.address.state}</h1>
-        <h1 class="scroll-m-20 font-extrabold tracking-tight lg:text-5xl text-[color:#77787E] text-xl">{juser.address.street_number} {juser.address.street_name} {juser.address.zip}</h1>
+    <div class="fixed -z-10 bg-[#1e1e22] inset-0 top-[20vh]"/>
+    <div class="w-full flex justify-center p-20 pt-12 flex-col items-center gap-3">
+        <Avatar firstName={juser.first_name[0]} lastName={juser.last_name[0]} editable={true} size={150} shadow={true}/>
+        <div class="mt-3">
+            <h1 class="text-[color:#B7BABE] text-3xl text-center">{juser.first_name} {juser.last_name}</h1>
+            <h1 class="text-[color:#77787E] text-xl text-center">{$user?.email}</h1>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+            <p class="text-[#77787E] text-right">State</p>
+            <p class="text-[#B7BABE]">${juser.address.state}</p>
+            <p class="text-[#77787E] text-right">City</p>
+            <p class="text-[#B7BABE]">${juser.address.city}</p>
+            <p class="text-[#77787E] text-right">ZIP Code</p>
+            <p class="text-[#B7BABE]">${juser.address.zip}</p>
+            <p class="text-[#77787E] text-right">Address</p>
+            <p class="text-[#B7BABE]">${juser.address.street_name} ${juser.address.street_number}</p>
+        </div>
+        <!-- <h1 class="scroll-m-20 font-extrabold tracking-tight lg:text-5xl text-[color:#77787E] text-xl">{juser.address.city}, {juser.address.state}</h1> -->
+        <!-- <h1 class="scroll-m-20 font-extrabold tracking-tight lg:text-5xl text-[color:#77787E] text-xl">{juser.address.street_number} {juser.address.street_name} {juser.address.zip}</h1> -->
         <Button class="m-4" variant="fancy" on:click={logOut}>Log Out</Button>
     </div>
 {/await}
