@@ -39,6 +39,7 @@
 			).json();
 
 			res.user.friends[i] = fres.user;
+			//friends.push(fres.user);
 			//res.user.friends[i].due = 0;
 		}
 
@@ -54,10 +55,16 @@
 			).json();
 
 			res.user.friend_requests[i] = user.user;
+			//friendRequests.push(user.user);
 		}
+
+		//console.log(res.user.friend_requests)
 
 		friends = res.user.friends;
 		friendRequests = res.user.friend_requests;
+
+		friends = friends.filter((e) => {return e != null});
+		friendRequests = friendRequests.filter((e) => {return e != null})
 	};
 
 	let emailToAdd = "";
@@ -80,7 +87,7 @@
 			toast.error("Cannot find user");
 		}
 
-		fetch(`/api/v1/user/${$user!.uid}/friend`, {
+		await fetch(`/api/v1/user/${$user!.uid}/friend`, {
 			method: "POST",
 			headers: {
 				auth_token: $user!.uid,
@@ -96,12 +103,19 @@
 	};
 
 	const addFriend = (id: string) => {
+		console.log(id)
+
 		fetch(`/api/v1/user/${$user!.uid}/accept_request`, {
 			method: "POST",
 			headers: {
-				auth_token: id,
-			}
+				auth_token: $user!.uid,
+			},
+			body: JSON.stringify({
+				friend_id: id,
+			}),
 		});
+
+		toast.success("Friend added!");
 	}
 
 	onMount(() => {
@@ -141,20 +155,22 @@
 		<h1 class="text-xl">Friend Requests</h1>
 
 		{#if friendRequests}
-			{#each friendRequests as request}
+			{#each friendRequests as friend}
 				<Dialog.Root>
-					<Dialog.Trigger class={buttonVariants({ variant: "outline" })}>
-						<FriendCard {request} />
+					<Dialog.Trigger>
+						<FriendCard {friend}/>
 					</Dialog.Trigger>
 
-					<Dialog.Header>
-						<Dialog.Title>Add friend?</Dialog.Title>
-					</Dialog.Header>
-
-					<Dialog.Footer>
-						<Button variant="fancy" on:click={() => addFriend(request.id)}>Add</Button>
-						<Button variant="fancy">Cancel</Button>
-					</Dialog.Footer>
+					<Dialog.Content>
+						<Dialog.Header>
+							<Dialog.Title>Add friend?</Dialog.Title>
+						</Dialog.Header>
+	
+						<Dialog.Footer>
+							<Button variant="fancy" on:click={() => addFriend(friend.id)}>Add</Button>
+							<Button variant="fancy">Cancel</Button>
+						</Dialog.Footer>
+					</Dialog.Content>
 				</Dialog.Root>
 				
 			{/each}

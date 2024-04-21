@@ -1,7 +1,12 @@
 <script lang="ts">
 	import Avatar from "$lib/components/Avatar.svelte";
+	import { onMount } from "svelte";
 
     export let friend: User;
+
+    onMount(() => {
+        console.log(friend)
+    })
 </script>
 
 <div class="flex gap-5 px-5 py-4 rounded-md border items-center bg-[#1D1D21]">

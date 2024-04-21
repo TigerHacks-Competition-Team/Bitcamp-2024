@@ -18,6 +18,9 @@ export async function POST(event: RequestEvent) {
         return new Response(stringify({ passed: false, error: "Friend request already sent" }), { status: 400 });
     
     user.friend_requests.push(req.friend_id);
+
+    console.log(user)
+
     await setDoc(doc(store, `users/${user.id}`), user);
 
     return new Response(stringify({ passed: true }), { status: 200 });
