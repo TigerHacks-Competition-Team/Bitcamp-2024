@@ -2,9 +2,10 @@
 	import Button from "$lib/components/ui/button/button.svelte";
 	import Input from "$lib/components/ui/input/input.svelte";
 	import Label from "$lib/components/ui/label/label.svelte";
-	import { signUpEmailAndPassword, auth } from "$lib/api/firebase";
+	import { signUpEmailAndPassword, auth, getUser } from "$lib/api/firebase";
 	import { updateProfile } from "firebase/auth";
 	import { toast } from "svelte-sonner";
+	import { goto } from "$app/navigation";
 
     let name = ""
 	let email = "";
@@ -16,11 +17,12 @@
 				displayName: `${name}`,
 			});
 
-			if (!auth.currentUser) return;
+			const usr = await getUser();
+
 			await fetch("/api/v1/user", {
 				method: "POST",
 				headers: {
-					"auth_token": auth.currentUser.uid,
+					"auth_token": usr.uid,
 				},
 				body: JSON.stringify({
 					first_name: "John",
@@ -34,6 +36,8 @@
 					},
 				}),
 			});
+
+			goto("/home");
 		}).catch(e => {
 			toast(`${e.name}: ${e.code}`);
 		});

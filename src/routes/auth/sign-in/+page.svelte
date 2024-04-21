@@ -4,6 +4,7 @@
 	import { Label } from '$lib/components/ui/label';
 	import { Button } from '$lib/components/ui/button';
 	import { toast } from 'svelte-sonner';
+	import { goto } from '$app/navigation';
 
     let email = "";
     let password = "";
@@ -11,6 +12,8 @@
     const onSubmit = () => {
         signInEmailAndPassword(email, password).catch(e => {
 			toast(`${e.name}: ${e.code}`);
+		}).then(() => {
+			goto("/home");
 		});;
     }
 </script>

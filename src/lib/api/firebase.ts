@@ -32,7 +32,7 @@ export const user = writable<User | null>(null);
 
 auth.onAuthStateChanged(u => {
 	user.set(u);
-	
+	/*
 	if (browser) {
 		if (!u && !(window.location.pathname.includes("/auth") || window.location.pathname == "/")) {
 			window.location.pathname = "/auth/sign-in/"
@@ -41,6 +41,7 @@ auth.onAuthStateChanged(u => {
 			window.location.pathname = "/home"
 		}
 	}
+	*/
 });
 
 export const getUser: () => Promise<User> = () => new Promise(res => {

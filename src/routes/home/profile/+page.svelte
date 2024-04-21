@@ -22,8 +22,6 @@
 
         if(!res.passed) return; //FIXME: Handle error
 
-        console.log(res.user);
-
         return res.user;
 	}
 

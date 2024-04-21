@@ -8,8 +8,6 @@
 	import CreditCardOutlineIcon from "../icons/CreditCardOutlineIcon.svelte";
     import Gradient from "../icons/Gradient.svelte";
 	import { page } from "$app/stores";
-
-    console.log($page.url.pathname);
 </script>
 
 <Gradient id="navbarIconSelectGrad"/>
