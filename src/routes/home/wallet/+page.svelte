@@ -41,7 +41,10 @@
 		// @ts-ignore
 		const name = (document.getElementById("card-name") as HTMLInputElement).value;
 
-		if(cardNumber.length !== 16 || expiration.length !== 5 || cvc.length !== 3 || name.length === 0) {
+		// @ts-ignore
+		const given_name = (document.getElementById("given-name") as HTMLInputElement).value;
+
+		if(cardNumber.length !== 16 || expiration.length !== 5 || cvc.length !== 3 || name.length === 0 || given_name.length === 0) {
 			toast("Invalid card details");
 			return;
 		}
@@ -61,6 +64,7 @@
 			body: JSON.stringify({
 				account_number: cardNumber,
 				expiration: expiration,
+				nickname: given_name,
 				name: name
 			}),
 		});
@@ -91,6 +95,7 @@
 				<Dialog.Header>
 					<Dialog.Title class="mb-2">Add a Credit Card</Dialog.Title>
 					<div class="flex flex-col gap-2">
+						<Input id="given-name" placeholder="Card Name" />
 						<Input id="card-number-input" placeholder="Card Number" />
 						<div class="flex flex-row gap-2">
 							<Input id="expiration-input" placeholder="Expiration Date" />

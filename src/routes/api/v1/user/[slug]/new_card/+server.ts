@@ -16,7 +16,7 @@ export async function POST(event: RequestEvent) {
         },
         body: JSON.stringify({
             type: "Credit Card",
-            nickname: (Math.random() + 1).toString(36).substring(2),
+            nickname: req.nickname,
             rewards: 0,
             balance: 500,
             account_number: req.account_number
